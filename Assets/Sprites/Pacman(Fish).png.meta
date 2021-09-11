@@ -20,6 +20,9 @@ TextureImporter:
   - first:
       213: 6150197379624688262
     second: Pacman(Fish)_5
+  - first:
+      213: 5320852735699019821
+    second: Pacman(Fish)_6
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -114,10 +117,10 @@ TextureImporter:
         serializedVersion: 2
         x: 4
         y: 268
-        width: 124
+        width: 120
         height: 104
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -135,10 +138,10 @@ TextureImporter:
         serializedVersion: 2
         x: 132
         y: 268
-        width: 124
+        width: 120
         height: 104
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -154,12 +157,12 @@ TextureImporter:
       name: Pacman(Fish)_2
       rect:
         serializedVersion: 2
-        x: 4
-        y: 140
-        width: 124
+        x: 260
+        y: 268
+        width: 120
         height: 104
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -175,12 +178,12 @@ TextureImporter:
       name: Pacman(Fish)_3
       rect:
         serializedVersion: 2
-        x: 132
+        x: 4
         y: 140
-        width: 124
+        width: 120
         height: 104
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -196,12 +199,12 @@ TextureImporter:
       name: Pacman(Fish)_4
       rect:
         serializedVersion: 2
-        x: 4
-        y: 12
-        width: 124
+        x: 132
+        y: 140
+        width: 120
         height: 104
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -217,12 +220,12 @@ TextureImporter:
       name: Pacman(Fish)_5
       rect:
         serializedVersion: 2
-        x: 132
-        y: 12
-        width: 124
+        x: 260
+        y: 140
+        width: 120
         height: 104
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -230,6 +233,27 @@ TextureImporter:
       bones: []
       spriteID: 68a511f7ee3e95550800000000000000
       internalID: 6150197379624688262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pacman(Fish)_6
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 12
+        width: 120
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d28618d3f5777d940800000000000000
+      internalID: 5320852735699019821
       vertices: []
       indices: 
       edges: []
