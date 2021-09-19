@@ -6,15 +6,18 @@ public class GhostController : MonoBehaviour //write subclasses for differing gh
 {
     [SerializeField] private GhostEyesDirection eyes;
 
-    private void OnCollisionEnter2D()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        Vector2 direction = move();
-        eyes.SetEyeDirection(direction);
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            Vector2 direction = move();
+            eyes.SetEyeDirection(direction);
+        }
     }
 
     private Vector2 move()
     {
-        return Vector2.zero;
+        return Vector2.left;
     }
 
 
