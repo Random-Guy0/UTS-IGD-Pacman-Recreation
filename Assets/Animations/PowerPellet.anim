@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Idle
+  m_Name: PowerPellet
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,7 +20,13 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 7595914737571012611, guid: ce793dd16531e73458fe8bf8917e7643, type: 3}
+      value: {fileID: -1434801676565703740, guid: 8d8e8fce5f13ad347a40528696f9c006, type: 3}
+    - time: 0.25
+      value: {fileID: -5713707397234246068, guid: 8d8e8fce5f13ad347a40528696f9c006, type: 3}
+    - time: 0.5
+      value: {fileID: 8138051047494447433, guid: 8d8e8fce5f13ad347a40528696f9c006, type: 3}
+    - time: 0.75
+      value: {fileID: -1434801676565703740, guid: 8d8e8fce5f13ad347a40528696f9c006, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -40,13 +46,16 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 7595914737571012611, guid: ce793dd16531e73458fe8bf8917e7643, type: 3}
+    - {fileID: -1434801676565703740, guid: 8d8e8fce5f13ad347a40528696f9c006, type: 3}
+    - {fileID: -5713707397234246068, guid: 8d8e8fce5f13ad347a40528696f9c006, type: 3}
+    - {fileID: 8138051047494447433, guid: 8d8e8fce5f13ad347a40528696f9c006, type: 3}
+    - {fileID: -1434801676565703740, guid: 8d8e8fce5f13ad347a40528696f9c006, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.016666668
+    m_StopTime: 0.76666665
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
