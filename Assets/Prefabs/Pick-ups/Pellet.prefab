@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 9106489846326573729}
   m_Layer: 0
   m_Name: Pellet
-  m_TagString: Untagged
+  m_TagString: Pellet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

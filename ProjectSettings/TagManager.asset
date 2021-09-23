@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Wall
   - Ghost House
+  - Cherry
+  - Pellet
+  - Power Pellet
   layers:
   - Default
   - TransparentFX
