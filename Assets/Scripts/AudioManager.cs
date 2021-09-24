@@ -13,12 +13,12 @@ public class AudioManager : MonoBehaviour
     private bool eatingPellet = false;
     private bool dead = false;
 
-    private void Start()
+    /*private void Start()
     {
         musicPlayer.clip = music[0];
         musicPlayer.Play();
         Invoke("SetupAudioSources", music[0].length);
-    }
+    }*/
 
     public void SetupAudioSources()
     {
@@ -29,7 +29,7 @@ public class AudioManager : MonoBehaviour
         dead = false;
     }
 
-    private void PlayMoveSound()
+    public void PlayMoveSound()
     {
         if (!dead)
         {

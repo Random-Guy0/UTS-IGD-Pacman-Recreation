@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6266983713255607622}
   - component: {fileID: 6266983713255607620}
   - component: {fileID: 8080131769442682313}
+  - component: {fileID: 5564165716272762175}
   m_Layer: 0
   m_Name: Pacman
   m_TagString: Untagged
@@ -110,7 +111,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6266983713255607623}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -129,3 +130,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &5564165716272762175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6266983713255607623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 305d2987d927f254fb171a1b29cc7646, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
