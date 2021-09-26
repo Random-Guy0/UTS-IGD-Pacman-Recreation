@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelGenerator : MonoBehaviour
+public class LevelGenerator : MonoBehaviour //i really hope this works
 {
 	[SerializeField] private GameObject manualLevel;
 
@@ -58,7 +58,7 @@ public class LevelGenerator : MonoBehaviour
 							break;
 						case 0:
 						case 2:
-							AlignCorner(currentSprite, nearbySprites, maxI, maxJ);
+							AlignCorner(currentSprite, nearbySprites, maxI, maxJ, i, j);
 							break;
 						case 6:
 							AlignTJunction(currentSprite, nearbySprites);
@@ -87,7 +87,7 @@ public class LevelGenerator : MonoBehaviour
         }
     }
 
-	private void AlignCorner(GameObject currentSprite, AdjacentSprites nearbySprites, int maxI, int maxJ)
+	private void AlignCorner(GameObject currentSprite, AdjacentSprites nearbySprites, int maxI, int maxJ, int spriteI, int spriteJ)
     {
 		bool[] adjacentSprites = new bool[4];
 		adjacentSprites[2] = nearbySprites.left > 0 && nearbySprites.left <= 4;
@@ -132,7 +132,50 @@ public class LevelGenerator : MonoBehaviour
         }
 		else if(trueCount == 3 || trueCount == 4)
         {
+			int[] diagonals = new int[4];
+			for(int i = 0; i < diagonals.Length; i++)
+            {
+				diagonals[i] = -1;
+            }
 
+			bool posI = spriteI + 1 < maxI;
+			bool negI = spriteI - 1 >= 0;
+			bool posJ = spriteJ + 1 < maxJ;
+			bool negJ = spriteJ - 1 >= 0;
+
+
+			if (posJ && negI)
+			{
+				diagonals[0] = levelMap[spriteI + 1, spriteJ + 1];
+			}
+
+			if(posJ && posI)
+            {
+				diagonals[1] = levelMap[spriteI - 1, spriteJ + 1];
+            }
+
+			if(negJ && posI)
+            {
+				diagonals[2] = levelMap[spriteI - 1, spriteJ - 1];
+            }
+
+			if(negJ && posI)
+            {
+				diagonals[3] = levelMap[spriteI + 1, spriteJ - 1];
+            }
+
+			int validRotaion = 0;
+
+			for(int i = 0; i < diagonals.Length; i++)
+            {
+				if(diagonals[i] == 0 || diagonals[i] == 5 || diagonals[i] == 6)
+                {
+					validRotaion = i;
+					break;
+                }
+            }
+
+			Rotate(currentSprite, 90.0f * validRotaion);
         }
 	}
 
