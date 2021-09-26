@@ -51,7 +51,7 @@ public class LevelGenerator : MonoBehaviour
                     {
 						case 1:
 						case 3:
-							AlignWall(i, j, currentSprite, maxJ);
+							AlignWall(i, j, currentSprite, maxI, maxJ);
 							break;
                     }
 				}
@@ -59,29 +59,53 @@ public class LevelGenerator : MonoBehaviour
         }
     }
 
-	private void AlignWall(int i, int j, GameObject currentSprite, int maxJ)
+	private void AlignWall(int i, int j, GameObject currentSprite,int maxI, int maxJ)
 	{
-		int previousSprite = -1;
-		int nextSprite = -1;
+		int previousSprite = 0;
+		int nextSprite = 0;
+		int aboveSprite = 0;
+		int belowSprite = 0;
 
 		if(j - 1 >= 0)
         {
 			previousSprite = levelMap[i, j - 1];
-			Debug.Log(previousSprite);
         }
 
 		if(j + 1 < maxJ)
         {
 			nextSprite = levelMap[i, j + 1];
-			Debug.Log(nextSprite);
         }
 
-        if ((previousSprite <= 4 && previousSprite > 0) || (nextSprite <= 4 && nextSprite > 0))
+		if (i - 1 >= 0)
+		{
+			belowSprite = levelMap[i - 1, j];
+		}
+
+		if (i + 1 < maxI)
+		{
+			aboveSprite = levelMap[i + 1, j];
+		}
+
+		bool spritesNearbyHorizontal = (previousSprite <= 4 && previousSprite > 0) || (nextSprite <= 4 && nextSprite > 0);
+		bool spritesNearbyVertical = (aboveSprite <= 4 && aboveSprite > 0) || (belowSprite <= 4 && belowSprite > 0);
+
+		bool twoSpritesHorizontal = (previousSprite <= 4 && previousSprite > 0) && (nextSprite <= 4 && nextSprite > 0);
+		bool twoSpritesVertical = (aboveSprite <= 4 && aboveSprite > 0) && (belowSprite <= 4 && belowSprite > 0);
+		
+		if ((spritesNearbyHorizontal && !spritesNearbyVertical) || (!twoSpritesVertical && twoSpritesHorizontal))
         {
-			Debug.Log("hi");
-			Vector3 rotation = currentSprite.transform.eulerAngles;
-			rotation.z += 90.0f;
-			currentSprite.transform.rotation = Quaternion.Euler(rotation);
+			Rotate(currentSprite, 90.0f);
+        }
+		else if((nextSprite == 2 || nextSprite == 4 || previousSprite == 2 || previousSprite ==4) && !twoSpritesVertical)
+        {
+			Rotate(currentSprite, 90.0f);
         }
     }
+
+	private void Rotate(GameObject gameObject, float angle)
+    {
+		Vector3 rotation = gameObject.transform.eulerAngles;
+		rotation.z += angle;
+		gameObject.transform.rotation = Quaternion.Euler(rotation);
+	}
 }
