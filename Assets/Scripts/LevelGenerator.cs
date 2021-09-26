@@ -30,7 +30,7 @@ public class LevelGenerator : MonoBehaviour //i really hope this works
 
     private void Start()
     {
-		//levelMap = RandomLevel(Random.Range(0, 100), Random.Range(0, 100)); //only uncomment this line if you want a horrible looking mess
+        //levelMap = RandomLevel(Random.Range(0, 100), Random.Range(0, 100)); //only uncomment this line if you want a horrible looking mess
 
 		Destroy(manualLevel);
 		GameObject level = new GameObject("level");
