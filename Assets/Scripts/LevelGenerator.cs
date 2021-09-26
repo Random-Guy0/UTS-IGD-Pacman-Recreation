@@ -46,12 +46,14 @@ public class LevelGenerator : MonoBehaviour
 				{
 					GameObject currentSprite = Instantiate(levelSprites[spriteInt], level.transform);
 					currentSprite.transform.Translate(position);
-					
+
+					AdjacentSprites nearbySprites = GetNearbySprites(i, j, maxI, maxJ);
+
 					switch(spriteInt)
                     {
 						case 1:
 						case 3:
-							AlignWall(i, j, currentSprite, maxI, maxJ);
+							AlignWall(currentSprite, nearbySprites);
 							break;
                     }
 				}
@@ -59,44 +61,19 @@ public class LevelGenerator : MonoBehaviour
         }
     }
 
-	private void AlignWall(int i, int j, GameObject currentSprite,int maxI, int maxJ)
+	private void AlignWall(GameObject currentSprite,AdjacentSprites nearbySprites)
 	{
-		int previousSprite = 0;
-		int nextSprite = 0;
-		int aboveSprite = 0;
-		int belowSprite = 0;
+		bool spritesNearbyHorizontal = (nearbySprites.left <= 4 && nearbySprites.left > 0) || (nearbySprites.right <= 4 && nearbySprites.right > 0);
+		bool spritesNearbyVertical = (nearbySprites.above <= 4 && nearbySprites.above > 0) || (nearbySprites.below <= 4 && nearbySprites.below > 0);
 
-		if(j - 1 >= 0)
-        {
-			previousSprite = levelMap[i, j - 1];
-        }
+		bool twoSpritesHorizontal = (nearbySprites.left <= 4 && nearbySprites.left > 0) && (nearbySprites.right <= 4 && nearbySprites.right > 0);
+		bool twoSpritesVertical = (nearbySprites.above <= 4 && nearbySprites.above > 0) && (nearbySprites.below <= 4 && nearbySprites.below > 0);
 
-		if(j + 1 < maxJ)
-        {
-			nextSprite = levelMap[i, j + 1];
-        }
-
-		if (i - 1 >= 0)
-		{
-			belowSprite = levelMap[i - 1, j];
-		}
-
-		if (i + 1 < maxI)
-		{
-			aboveSprite = levelMap[i + 1, j];
-		}
-
-		bool spritesNearbyHorizontal = (previousSprite <= 4 && previousSprite > 0) || (nextSprite <= 4 && nextSprite > 0);
-		bool spritesNearbyVertical = (aboveSprite <= 4 && aboveSprite > 0) || (belowSprite <= 4 && belowSprite > 0);
-
-		bool twoSpritesHorizontal = (previousSprite <= 4 && previousSprite > 0) && (nextSprite <= 4 && nextSprite > 0);
-		bool twoSpritesVertical = (aboveSprite <= 4 && aboveSprite > 0) && (belowSprite <= 4 && belowSprite > 0);
-		
 		if ((spritesNearbyHorizontal && !spritesNearbyVertical) || (!twoSpritesVertical && twoSpritesHorizontal))
         {
 			Rotate(currentSprite, 90.0f);
         }
-		else if((nextSprite == 2 || nextSprite == 4 || previousSprite == 2 || previousSprite ==4) && !twoSpritesVertical)
+		else if((nearbySprites.right == 2 || nearbySprites.right == 4 || nearbySprites.left == 2 || nearbySprites.left ==4) && !twoSpritesVertical)
         {
 			Rotate(currentSprite, 90.0f);
         }
@@ -108,4 +85,51 @@ public class LevelGenerator : MonoBehaviour
 		rotation.z += angle;
 		gameObject.transform.rotation = Quaternion.Euler(rotation);
 	}
+
+	public AdjacentSprites GetNearbySprites(int i, int j, int maxI, int maxJ)
+    {
+		int previousSprite = 0;
+		int nextSprite = 0;
+		int aboveSprite = 0;
+		int belowSprite = 0;
+
+		if (j - 1 >= 0)
+		{
+			previousSprite = levelMap[i, j - 1];
+		}
+
+		if (j + 1 < maxJ)
+		{
+			nextSprite = levelMap[i, j + 1];
+		}
+
+		if (i - 1 >= 0)
+		{
+			belowSprite = levelMap[i - 1, j];
+		}
+
+		if (i + 1 < maxI)
+		{
+			aboveSprite = levelMap[i + 1, j];
+		}
+
+		return new AdjacentSprites(previousSprite, nextSprite, aboveSprite, belowSprite);
+	}
+}
+
+
+public class AdjacentSprites
+{
+	public int left;
+	public int right;
+	public int above;
+	public int below;
+
+    public AdjacentSprites(int left, int right, int above, int below)
+    {
+        this.left = left;
+        this.right = right;
+        this.above = above;
+        this.below = below;
+    }
 }
