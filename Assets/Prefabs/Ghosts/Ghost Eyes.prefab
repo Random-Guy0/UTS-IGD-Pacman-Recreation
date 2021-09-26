@@ -102,3 +102,4 @@ MonoBehaviour:
   - {fileID: 2117783031720985270, guid: 391054fc8ad2cb840bd85c5e6161ced2, type: 3}
   - {fileID: 4592269722804599499, guid: 391054fc8ad2cb840bd85c5e6161ced2, type: 3}
   eyes: {fileID: 296948676199845165}
+  direction: {x: -1, y: 0}

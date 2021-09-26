@@ -1,0 +1,3 @@
+IMPORTANT INFO
+Pacman's walking direction is handled in the PlayerController script instead of in an animator.
+The ghosts also have their movement direction animation handled through script. This is done by passing a Vector2 into a method I have written, which then determines the correct sprite to use. The Vector2 will be supplied by the GhostController script in Assessment 4. This script is attached to the Eyes prefab. You can edit the direction while in play mode to test this if you want.
