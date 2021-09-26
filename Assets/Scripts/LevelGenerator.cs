@@ -31,10 +31,11 @@ public class LevelGenerator : MonoBehaviour
     {
 		Destroy(manualLevel);
 		GameObject level = new GameObject("level");
-		level.transform.Translate(new Vector3(-13.5f, 14.0f));
 
 		int maxI = levelMap.GetLength(0);
 		int maxJ = levelMap.GetLength(1);
+
+		level.transform.Translate(new Vector3(-maxJ + 0.5f, maxI - 1f));
 
 		for (int i = 0; i < maxI; i++)
         {
@@ -55,13 +56,20 @@ public class LevelGenerator : MonoBehaviour
 						case 3:
 							AlignWall(currentSprite, nearbySprites);
 							break;
+						case 0:
+						case 2:
+							AlignCorner(currentSprite, nearbySprites, maxI, maxJ);
+							break;
+						case 6:
+							AlignTJunction(currentSprite, nearbySprites);
+							break;
                     }
 				}
 			}
         }
     }
 
-	private void AlignWall(GameObject currentSprite,AdjacentSprites nearbySprites)
+	private void AlignWall(GameObject currentSprite, AdjacentSprites nearbySprites)
 	{
 		bool spritesNearbyHorizontal = (nearbySprites.left <= 4 && nearbySprites.left > 0) || (nearbySprites.right <= 4 && nearbySprites.right > 0);
 		bool spritesNearbyVertical = (nearbySprites.above <= 4 && nearbySprites.above > 0) || (nearbySprites.below <= 4 && nearbySprites.below > 0);
@@ -76,6 +84,87 @@ public class LevelGenerator : MonoBehaviour
 		else if((nearbySprites.right == 2 || nearbySprites.right == 4 || nearbySprites.left == 2 || nearbySprites.left ==4) && !twoSpritesVertical)
         {
 			Rotate(currentSprite, 90.0f);
+        }
+    }
+
+	private void AlignCorner(GameObject currentSprite, AdjacentSprites nearbySprites, int maxI, int maxJ)
+    {
+		bool[] adjacentSprites = new bool[4];
+		adjacentSprites[2] = nearbySprites.left > 0 && nearbySprites.left <= 4;
+		adjacentSprites[3] = nearbySprites.below > 0 && nearbySprites.below <= 4;
+		adjacentSprites[0] = nearbySprites.right > 0 && nearbySprites.right <= 4;
+		adjacentSprites[1] = nearbySprites.above > 0 && nearbySprites.above <= 4;
+
+		int trueCount = 0;
+		foreach(bool adjacentSprite in adjacentSprites)
+        {
+			if(adjacentSprite)
+            {
+				trueCount++;
+            }
+        }
+
+		if(trueCount == 1)
+        {
+			for (int i = 0; i < adjacentSprites.Length; i++)
+			{
+				if (adjacentSprites[i])
+				{
+					Rotate(currentSprite, 90.0f * i);
+					break;
+				}
+			}
+        }
+		else if (trueCount == 2)
+        {
+			if(adjacentSprites[2] && adjacentSprites[3])
+            {
+				Rotate(currentSprite, -90.0f);
+            }
+			else if(adjacentSprites[2] && adjacentSprites[1])
+            {
+				Rotate(currentSprite, 180.0f);
+            }
+			else if(adjacentSprites[0] && adjacentSprites[1])
+            {
+				Rotate(currentSprite, 90.0f);
+            }
+        }
+		else if(trueCount == 3 || trueCount == 4)
+        {
+
+        }
+	}
+
+	private void AlignTJunction(GameObject currentSprite, AdjacentSprites nearbySprites)
+    {
+		bool[] validRotations = new bool[4];
+		validRotations[0] = nearbySprites.left == 2 && nearbySprites.below == 4;
+		validRotations[1] = nearbySprites.below == 2 && nearbySprites.right == 4;
+		validRotations[2] = nearbySprites.right == 2 && nearbySprites.above == 4;
+		validRotations[3] = nearbySprites.above == 2 && nearbySprites.left == 4;
+
+		int trueCount = 0;
+		foreach(bool validRotation in validRotations)
+        {
+			if(validRotation)
+            {
+				trueCount++;
+            }
+        }
+
+		if(trueCount == 1)
+        {
+			int correctRotation = 0;
+			for(int i = 0; i < validRotations.Length; i++)
+            {
+				if(validRotations[i])
+                {
+					correctRotation = i;
+                }
+            }
+
+			Rotate(currentSprite, 90.0f * correctRotation);
         }
     }
 
@@ -103,14 +192,14 @@ public class LevelGenerator : MonoBehaviour
 			nextSprite = levelMap[i, j + 1];
 		}
 
-		if (i - 1 >= 0)
-		{
-			belowSprite = levelMap[i - 1, j];
-		}
-
 		if (i + 1 < maxI)
 		{
-			aboveSprite = levelMap[i + 1, j];
+			belowSprite = levelMap[i + 1, j];
+		}
+
+		if (i - 1 >= 0)
+		{
+			aboveSprite = levelMap[i - 1, j];
 		}
 
 		return new AdjacentSprites(previousSprite, nextSprite, aboveSprite, belowSprite);
@@ -131,5 +220,10 @@ public class AdjacentSprites
         this.right = right;
         this.above = above;
         this.below = below;
+    }
+
+    public override string ToString()
+    {
+		return "Left: " + left + ", Right: " + right + ", Above: " + above + ", Below: " + below;
     }
 }
