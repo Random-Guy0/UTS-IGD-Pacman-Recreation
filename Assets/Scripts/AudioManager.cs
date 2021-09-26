@@ -13,18 +13,18 @@ public class AudioManager : MonoBehaviour
     private bool eatingPellet = false;
     private bool dead = false;
 
-    /*private void Start()
+    private void Start()
     {
         musicPlayer.clip = music[0];
         musicPlayer.Play();
         Invoke("SetupAudioSources", music[0].length);
-    }*/
+    }
 
     public void SetupAudioSources()
     {
         GhostNormalState();
 
-        PlayMoveSound();
+        //PlayMoveSound();
 
         dead = false;
     }
