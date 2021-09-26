@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LevelGenerator : MonoBehaviour //i really hope this works
 {
+	//be prepared for extreme spaghetti code
 	[SerializeField] private GameObject manualLevel;
 
 	[SerializeField] private GameObject[] levelSprites;
@@ -29,6 +30,8 @@ public class LevelGenerator : MonoBehaviour //i really hope this works
 
     private void Start()
     {
+		//levelMap = RandomLevel(Random.Range(0, 100), Random.Range(0, 100)); //only uncomment this line if you want a horrible looking mess
+
 		Destroy(manualLevel);
 		GameObject level = new GameObject("level");
 
@@ -66,6 +69,27 @@ public class LevelGenerator : MonoBehaviour //i really hope this works
                     }
 				}
 			}
+        }
+
+		GameObject topRight = Instantiate(level);
+		FlipX(topRight);
+
+		GameObject bottomLeft = Instantiate(level);
+		FlipY(bottomLeft);
+		RemoveDuplicateRow(bottomLeft, maxI);
+
+		GameObject bottomRight = Instantiate(bottomLeft);
+		FlipX(bottomRight);
+		RemoveDuplicateRow(bottomRight, maxI);
+
+		GameObject[] pellets = GameObject.FindGameObjectsWithTag("Pellet");
+
+		foreach(GameObject pellet in pellets)
+        {
+			if(pellet.transform.position.y < 0)
+            {
+				Rotate(pellet, 180.0f);
+            }
         }
     }
 
@@ -144,17 +168,17 @@ public class LevelGenerator : MonoBehaviour //i really hope this works
 			bool negJ = spriteJ - 1 >= 0;
 
 
-			if (posJ && negI)
+			if (posJ && posI)
 			{
 				diagonals[0] = levelMap[spriteI + 1, spriteJ + 1];
 			}
 
-			if(posJ && posI)
+			if(posJ && negI)
             {
 				diagonals[1] = levelMap[spriteI - 1, spriteJ + 1];
             }
 
-			if(negJ && posI)
+			if(negJ && negI)
             {
 				diagonals[2] = levelMap[spriteI - 1, spriteJ - 1];
             }
@@ -247,6 +271,53 @@ public class LevelGenerator : MonoBehaviour //i really hope this works
 
 		return new AdjacentSprites(previousSprite, nextSprite, aboveSprite, belowSprite);
 	}
+
+	private void FlipX(GameObject objectToFlip)
+    {
+		Vector3 scale = objectToFlip.transform.localScale;
+		scale.x *= -1;
+		objectToFlip.transform.localScale = scale;
+
+		Vector3 pos = objectToFlip.transform.position;
+		pos.x *= -1;
+		objectToFlip.transform.position = pos;
+    }
+
+	private void FlipY(GameObject objectToFlip)
+	{
+		Vector3 scale = objectToFlip.transform.localScale;
+		scale.y *= -1;
+		objectToFlip.transform.localScale = scale;
+
+		Vector3 pos = objectToFlip.transform.position;
+		pos.y *= -1;
+		objectToFlip.transform.position = pos;
+	}
+
+	private void RemoveDuplicateRow(GameObject level, int maxI)
+    {
+		foreach (Transform child in level.transform)
+		{
+			if (child.localPosition.y == -maxI + 1)
+			{
+				Destroy(child.gameObject);
+			}
+		}
+	}
+
+
+	private int[,] RandomLevel(int maxI, int maxJ) //bad random function for testing
+    {
+		int[,] newLevelMap = new int[maxI, maxJ];
+		for(int i = 0; i < maxI; i++)
+        {
+			for(int j = 0; j < maxJ; j++)
+            {
+				newLevelMap[i, j] = Random.Range(0, 8);
+            }
+        }
+		return newLevelMap;
+    }
 }
 
 
