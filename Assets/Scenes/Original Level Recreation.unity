@@ -12012,58 +12012,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2532646584595437018, guid: 1e25c951d4b9c064b8863c361a47c199, type: 3}
   m_PrefabInstance: {fileID: 596621473}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &596714066
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 596714068}
-  - component: {fileID: 596714067}
-  m_Layer: 0
-  m_Name: Level Generator
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &596714067
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 596714066}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 988dd0fdd9d2f8842a74e9899281bd5b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  manualLevel: {fileID: 976794737}
-  levelSprites:
-  - {fileID: 2532646584595437016, guid: 1e25c951d4b9c064b8863c361a47c199, type: 3}
-  - {fileID: 7072315998268467832, guid: e8f5b31d3a7093d4c89d3eecbb4bf8c3, type: 3}
-  - {fileID: 7846858870488901576, guid: 703a9148d4647964eaf07932ba554d97, type: 3}
-  - {fileID: 2958017690608479225, guid: dff8cd05fefd3dc40ac258acf85906df, type: 3}
-  - {fileID: 7407111311039582886, guid: b3e183a5226828040b720f5533653e5e, type: 3}
-  - {fileID: 5805903098034012911, guid: 3cf261b7fd25e6841b9dbb815042a267, type: 3}
-  - {fileID: 215536619216058226, guid: 5a6b99b5918d78d4a834743f678cb1d3, type: 3}
---- !u!4 &596714068
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 596714066}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &597476910
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13827,7 +13775,7 @@ Transform:
   - {fileID: 702485526}
   - {fileID: 1478947087}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &677446939
 PrefabInstance:
@@ -16164,7 +16112,7 @@ Transform:
   - {fileID: 1734992119}
   - {fileID: 605551035}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &764689047
 PrefabInstance:
@@ -19434,7 +19382,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &891352170
 PrefabInstance:
@@ -21472,7 +21420,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1024753790
 PrefabInstance:
@@ -27019,7 +26967,7 @@ Transform:
   - {fileID: 233558489}
   - {fileID: 1612322354}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1298012667
 PrefabInstance:
@@ -30431,7 +30379,7 @@ Transform:
   - {fileID: 1826133423}
   - {fileID: 1171148638}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1487495583
 PrefabInstance:
@@ -32517,7 +32465,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1571006392
 PrefabInstance:
@@ -45536,7 +45484,8 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5564165716272762175, guid: c4ce944ce14ea464f86f6d9730fa8a51, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c4ce944ce14ea464f86f6d9730fa8a51, type: 3}
 --- !u!95 &6266983713008124263 stripped
 Animator:
