@@ -355,7 +355,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: The Power of Time
+  m_text: The Fish of Time
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7bc94e3f61c5dd54f83a2e34f0924e8d, type: 2}
   m_sharedMaterial: {fileID: -7367762995129383387, guid: 7bc94e3f61c5dd54f83a2e34f0924e8d, type: 2}
