@@ -15,7 +15,7 @@ public class AnimatedBorderPellet : MonoBehaviour
         canvas = GameObject.FindGameObjectWithTag("Animated Border").GetComponent<RectTransform>();
 
         //ensures that the border can fit in both 4:3 and 16:9 aspect ratios by disabling pellets that extend beyond the screens edge
-        gameObject.SetActive(canvas.rect.Contains(rectTransform.anchoredPosition));
+        gameObject.SetActive(canvas.rect.Contains(new Vector2(Mathf.Abs(rectTransform.anchoredPosition.x) + 10.0f, Mathf.Abs(rectTransform.anchoredPosition.y) + 10.0f)));
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
