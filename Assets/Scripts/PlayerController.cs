@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         animator.SetTrigger("startMoving");
         targetList = new Vector3[] { new Vector3(-7.5f, 13.0f), new Vector3(-7.5f, 9.0f), new Vector3(-12.5f, 9.0f), new Vector3(-12.5f, 13.0f) };
-        activeTween = new Tween(transform.position, targetList[i], Time.time, CalculateDuration(transform.position, targetList[i]));
+        activeTween = new Tween(transform, transform.position, targetList[i], Time.time, CalculateDuration(transform.position, targetList[i]));
     }
 
     private void Update()
@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
             {
                 i = 0;
             }
-            activeTween = new Tween(transform.position, targetList[i], Time.time, CalculateDuration(transform.position, targetList[i]));
+            activeTween = new Tween(transform, transform.position, targetList[i], Time.time, CalculateDuration(transform.position, targetList[i]));
         }
     }
 
@@ -73,21 +73,5 @@ public class PlayerController : MonoBehaviour
         float distance = Vector3.Distance(startPos, endPos);
         float duration = distance / speed;
         return duration;
-    }
-}
-
-public class Tween
-{
-    public Vector3 StartPos { get; }
-    public Vector3 EndPos { get; }
-    public float StartTime { get; }
-    public float Duration { get; }
-
-    public Tween(Vector3 startPos, Vector3 endPos, float startTime, float duration)
-    {
-        StartPos = startPos;
-        EndPos = endPos;
-        StartTime = startTime;
-        Duration = duration;
     }
 }

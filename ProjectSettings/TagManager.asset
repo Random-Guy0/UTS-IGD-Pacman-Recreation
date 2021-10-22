@@ -9,6 +9,7 @@ TagManager:
   - Cherry
   - Pellet
   - Power Pellet
+  - Animated Border
   layers:
   - Default
   - TransparentFX
