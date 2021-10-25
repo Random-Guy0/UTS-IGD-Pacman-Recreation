@@ -36325,7 +36325,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 16
+  orthographic size: 15
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -36337,7 +36337,7 @@ Camera:
   m_HDR: 1
   m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
-  m_ForceIntoRT: 0
+  m_ForceIntoRT: 1
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
@@ -36368,11 +36368,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AssetsPPU: 32
-  m_RefResolutionX: 1920
-  m_RefResolutionY: 1080
+  m_RefResolutionX: 1280
+  m_RefResolutionY: 960
   m_UpscaleRT: 1
   m_PixelSnapping: 1
-  m_CropFrameX: 1
+  m_CropFrameX: 0
   m_CropFrameY: 1
   m_StretchFill: 1
 --- !u!1001 &1866297107
