@@ -4,16 +4,14 @@ using UnityEngine;
 
 public class Tweener : MonoBehaviour
 {
-    //private Tween activeTween;
-
     private List<Tween> activeTweens = new List<Tween>();
 
-    public bool AddTween(Transform targetObject, Vector3 startPos, Vector3 endPos, float duration)
+    public bool AddTween(Transform target, Vector3 startPos, Vector3 endPos, float duration, ITweenableObject targetObject)
     {
-        bool exists = TweenExists(targetObject);
+        bool exists = TweenExists(target);
         if(!exists)
         {
-            activeTweens.Add(new Tween(targetObject, startPos, endPos, Time.time, duration));
+            activeTweens.Add(new Tween(target, startPos, endPos, Time.time, duration, targetObject));
             return true;
         }
         else
@@ -35,6 +33,7 @@ public class Tweener : MonoBehaviour
             else
             {
                 activeTweens[i].Target.position = activeTweens[i].EndPos;
+                activeTweens[i].TargetObject.NextTween();
                 activeTweens.RemoveAt(i);
                 i--;
             }

@@ -10,6 +10,8 @@ public class Tween
     public float StartTime { get; }
     public float Duration { get; }
 
+    public ITweenableObject TargetObject { get; }
+
     public Tween(Transform target, Vector3 startPos, Vector3 endPos, float startTime, float duration)
     {
         Target = target;
@@ -17,5 +19,10 @@ public class Tween
         EndPos = endPos;
         StartTime = startTime;
         Duration = duration;
+    }
+
+    public Tween(Transform target, Vector3 startPos, Vector3 endPos, float startTime, float duration, ITweenableObject targetObject) : this(target, startPos, endPos, startTime, duration)
+    {
+        TargetObject = targetObject;
     }
 }
