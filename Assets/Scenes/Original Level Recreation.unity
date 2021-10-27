@@ -44268,9 +44268,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 5325137871926582213, guid: c4ce944ce14ea464f86f6d9730fa8a51, type: 3}
+      propertyPath: speed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5325137871926582213, guid: c4ce944ce14ea464f86f6d9730fa8a51, type: 3}
       propertyPath: tweener
       value: 
       objectReference: {fileID: 684489534}
+    - target: {fileID: 5325137871926582213, guid: c4ce944ce14ea464f86f6d9730fa8a51, type: 3}
+      propertyPath: gridManager
+      value: 
+      objectReference: {fileID: 686316143}
     - target: {fileID: 6266983713255607621, guid: c4ce944ce14ea464f86f6d9730fa8a51, type: 3}
       propertyPath: m_RootOrder
       value: 3
