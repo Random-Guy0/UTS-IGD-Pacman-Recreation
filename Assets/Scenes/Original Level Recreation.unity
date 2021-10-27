@@ -6565,7 +6565,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.8
+  m_Volume: 0.35
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -44269,7 +44269,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5325137871926582213, guid: c4ce944ce14ea464f86f6d9730fa8a51, type: 3}
       propertyPath: speed
-      value: 5
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 5325137871926582213, guid: c4ce944ce14ea464f86f6d9730fa8a51, type: 3}
       propertyPath: tweener
@@ -44279,6 +44279,10 @@ PrefabInstance:
       propertyPath: gridManager
       value: 
       objectReference: {fileID: 686316143}
+    - target: {fileID: 5325137871926582213, guid: c4ce944ce14ea464f86f6d9730fa8a51, type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 1451920083}
     - target: {fileID: 6266983713255607621, guid: c4ce944ce14ea464f86f6d9730fa8a51, type: 3}
       propertyPath: m_RootOrder
       value: 3

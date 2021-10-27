@@ -57,4 +57,9 @@ public class GridManager : MonoBehaviour
             && selectedGrid.ObjectType != GridObjectType.OutsideCorner && selectedGrid.ObjectType != GridObjectType.OutsideWall 
             && selectedGrid.ObjectType != GridObjectType.TJunction;
     }
+
+    public GridObjectType GetGridObjectType(Vector2 gridPos)
+    {
+        return grid[(int)gridPos.x + 13, (int)gridPos.y + 14].ObjectType;
+    }
 }

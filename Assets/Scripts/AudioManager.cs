@@ -11,28 +11,14 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource musicPlayer;
 
     private bool eatingPellet = false;
-    private bool dead = false;
-
-    private void Start()
-    {
-        musicPlayer.clip = music[0];
-        musicPlayer.Play();
-        Invoke("SetupAudioSources", music[0].length);
-    }
-
-    public void SetupAudioSources()
-    {
-        GhostNormalState();
-
-        //PlayMoveSound();
-
-        dead = false;
-    }
+    private bool moving = false;
 
     public void PlayMoveSound()
     {
-        if (!dead)
+        if (!moving)
         {
+            moving = true;
+            eatingPellet = false;
             soundEffectPlayer.clip = soundEffects[0];
             soundEffectPlayer.volume = 0.25f;
             soundEffectPlayer.loop = true;
@@ -40,18 +26,16 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public IEnumerator EatPellet()
+    public void EatPellet()
     {
         if (!eatingPellet)
         {
-            soundEffectPlayer.clip = soundEffects[1];
-            soundEffectPlayer.volume = 1.0f;
-            soundEffectPlayer.loop = false;
-            soundEffectPlayer.Play();
             eatingPellet = true;
-            yield return new WaitForSeconds(soundEffects[1].length);
-            eatingPellet = false;
-            PlayMoveSound();
+            moving = false;
+            soundEffectPlayer.clip = soundEffects[1];
+            soundEffectPlayer.volume = 0.5f;
+            soundEffectPlayer.loop = true;
+            soundEffectPlayer.Play();
         }
     }
 
@@ -91,5 +75,15 @@ public class AudioManager : MonoBehaviour
         musicPlayer.clip = music[3];
         musicPlayer.loop = true;
         musicPlayer.Play();
+    }
+
+    public bool PlayingSoundEffect()
+    {
+        return soundEffectPlayer.isPlaying;
+    }
+
+    public void StopSoundEffects()
+    {
+        soundEffectPlayer.Stop();
     }
 }
