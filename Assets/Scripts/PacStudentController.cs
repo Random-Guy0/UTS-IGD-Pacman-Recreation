@@ -42,26 +42,22 @@ public class PacStudentController : MonoBehaviour, ITweenableObject
             lastInput.y = verInput;
         }
 
+        if (currentInput != Vector2.zero)
+        {
+            PlaySoundEffect(gridPos + currentInput);
+        }
+
         if (!isTweening)
         {
             if (gridManager.PositionIsMoveable(gridPos + lastInput))
             {
                 currentInput = lastInput;
 
-                if (currentInput != Vector2.zero)
-                {
-                    PlaySoundEffect(gridPos + currentInput);
-                }
-
                 isTweening = true;
                 tweener.AddTween(transform, transform.position, GridManager.GridToGlobalPosition(gridPos + currentInput), 1.0f / speed, this);
             }
             else if (gridManager.PositionIsMoveable(gridPos + currentInput))
             {
-                if (currentInput != Vector2.zero)
-                {
-                    PlaySoundEffect(gridPos + currentInput);
-                }
 
                 isTweening = true;
                 tweener.AddTween(transform, transform.position, GridManager.GridToGlobalPosition(gridPos + currentInput), 1.0f / speed, this);
@@ -88,8 +84,14 @@ public class PacStudentController : MonoBehaviour, ITweenableObject
             case GridObjectType.PowerPellet:
                 audioManager.EatPellet();
                 break;
-            default:
-                audioManager.StopSoundEffects();
+            case GridObjectType.InsideCorner:
+            case GridObjectType.InsideWall:
+            case GridObjectType.OutsideCorner:
+            case GridObjectType.OutsideWall:
+                if (lastInput == currentInput)
+                {
+                    audioManager.StopSoundEffects();
+                }
                 break;
         }
     }

@@ -28892,7 +28892,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundEffects:
   - {fileID: 8300000, guid: 066017af98c968047a47d6cbc6133a37, type: 3}
-  - {fileID: 8300000, guid: f898b8793b7662c4085c9cfa28225cac, type: 3}
+  - {fileID: 8300000, guid: 9399e01fe48dc5147a429a61f1e9d8e2, type: 3}
   - {fileID: 8300000, guid: 7ac5c46e9061c4649a79aea0629b7b37, type: 3}
   - {fileID: 8300000, guid: 073db2f92bdd3924d99b06a8f5379b84, type: 3}
   music:

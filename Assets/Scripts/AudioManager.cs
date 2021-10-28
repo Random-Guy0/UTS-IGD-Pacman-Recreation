@@ -33,7 +33,7 @@ public class AudioManager : MonoBehaviour
             eatingPellet = true;
             moving = false;
             soundEffectPlayer.clip = soundEffects[1];
-            soundEffectPlayer.volume = 0.5f;
+            soundEffectPlayer.volume = 0.35f;
             soundEffectPlayer.loop = true;
             soundEffectPlayer.Play();
         }
@@ -84,6 +84,9 @@ public class AudioManager : MonoBehaviour
 
     public void StopSoundEffects()
     {
+        moving = false;
+        eatingPellet = false;
+        soundEffectPlayer.loop = false;
         soundEffectPlayer.Stop();
     }
 }
