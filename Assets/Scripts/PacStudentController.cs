@@ -7,6 +7,7 @@ public class PacStudentController : MonoBehaviour, ITweenableObject
     [SerializeField] private Tweener tweener;
     [SerializeField] private GridManager gridManager;
     [SerializeField] private AudioManager audioManager;
+    [SerializeField] private Animator animator;
     [SerializeField] private float speed;
 
     private Vector2 gridPos;
@@ -54,14 +55,17 @@ public class PacStudentController : MonoBehaviour, ITweenableObject
                 currentInput = lastInput;
 
                 isTweening = true;
+                animator.SetFloat("Moving", 1.0f);
                 tweener.AddTween(transform, transform.position, GridManager.GridToGlobalPosition(gridPos + currentInput), 1.0f / speed, this);
             }
             else if (gridManager.PositionIsMoveable(gridPos + currentInput))
             {
 
                 isTweening = true;
+                animator.SetFloat("Moving", 1.0f);
                 tweener.AddTween(transform, transform.position, GridManager.GridToGlobalPosition(gridPos + currentInput), 1.0f / speed, this);
             }
+            RotatePacStudent(currentInput);
         }
     }
 
@@ -69,6 +73,7 @@ public class PacStudentController : MonoBehaviour, ITweenableObject
     {
         gridPos = GridManager.GlobalPositionToGrid(transform.position);
         isTweening = false;
+        animator.SetFloat("Moving", 0.0f);
     }
 
     private void PlaySoundEffect(Vector2 gridPos)
@@ -88,10 +93,47 @@ public class PacStudentController : MonoBehaviour, ITweenableObject
             case GridObjectType.InsideWall:
             case GridObjectType.OutsideCorner:
             case GridObjectType.OutsideWall:
-                if (lastInput == currentInput)
+                if (!gridManager.PositionIsMoveable(this.gridPos + lastInput) && !gridManager.PositionIsMoveable(gridPos))
                 {
                     audioManager.StopSoundEffects();
                 }
+                break;
+        }
+    }
+
+    private void RotatePacStudent(Vector2 direction)
+    {
+        switch(direction)
+        {
+            case Vector2 dir when dir.Equals(Vector2.right):
+                transform.rotation = Quaternion.Euler(Vector3.zero);
+                transform.localScale = Vector3.one;
+                break;
+            case Vector2 dir when dir.Equals(Vector2.left):
+                transform.rotation = Quaternion.Euler(Vector3.zero);
+                Vector3 scale = Vector3.one;
+                scale.x = -1.0f;
+                transform.localScale = scale;
+                break;
+            case Vector2 dir when dir.Equals(Vector2.up):
+                Vector3 newScaleUp = transform.localScale;
+                if(transform.localScale.x == -1.0f)
+                {
+                    newScaleUp = Vector3.one;
+                    newScaleUp.y = -1.0f;
+                }
+                transform.localScale = newScaleUp;
+                transform.rotation = Quaternion.Euler(Vector3.forward * 90.0f);
+                break;
+            case Vector2 dir when dir.Equals(Vector2.down):
+                Vector3 newScaleDown = transform.localScale;
+                if (transform.localScale.x == -1.0f)
+                {
+                    newScaleDown = Vector3.one;
+                    newScaleDown.y = -1.0f;
+                }
+                transform.localScale = newScaleDown;
+                transform.rotation = Quaternion.Euler(Vector3.forward * -90.0f);
                 break;
         }
     }
