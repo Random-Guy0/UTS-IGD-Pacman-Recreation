@@ -15111,6 +15111,52 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2958017690608479227, guid: dff8cd05fefd3dc40ac258acf85906df, type: 3}
   m_PrefabInstance: {fileID: 732999094}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &733204370
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 733204372}
+  - component: {fileID: 733204371}
+  m_Layer: 0
+  m_Name: Cherry Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &733204371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 733204370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34c134239335d1c409815dc390a72380, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cherry: {fileID: 5193514047215192657, guid: 743dc8e789de4de48af576ba749f55a1, type: 3}
+  tweener: {fileID: 684489534}
+  speed: 0
+--- !u!4 &733204372
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 733204370}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.819068, y: 1.211024, z: -94.96681}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &734915085
 PrefabInstance:
   m_ObjectHideFlags: 0

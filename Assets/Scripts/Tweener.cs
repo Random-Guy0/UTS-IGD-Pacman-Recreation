@@ -32,7 +32,10 @@ public class Tweener : MonoBehaviour
             else
             {
                 activeTweens[i].Target.position = activeTweens[i].EndPos;
-                activeTweens[i].TargetObject.NextTween();
+                if (activeTweens[i].TargetObject != null)
+                {
+                    activeTweens[i].TargetObject.NextTween();
+                }
                 activeTweens.RemoveAt(i);
                 i--;
             }
