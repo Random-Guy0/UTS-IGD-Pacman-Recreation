@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.ParticleSystem;
 
 public class PacStudentController : MonoBehaviour, ITweenableObject
 {
@@ -8,6 +9,7 @@ public class PacStudentController : MonoBehaviour, ITweenableObject
     [SerializeField] private GridManager gridManager;
     [SerializeField] private AudioManager audioManager;
     [SerializeField] private Animator animator;
+    [SerializeField] private ParticleSystem dustEffect;
     [SerializeField] private float speed;
 
     private Vector2 gridPos;
@@ -46,6 +48,21 @@ public class PacStudentController : MonoBehaviour, ITweenableObject
         if (currentInput != Vector2.zero)
         {
             PlaySoundEffect(gridPos + currentInput);
+
+            if (!gridManager.PositionIsMoveable(gridPos + currentInput) && !gridManager.PositionIsMoveable(gridPos + lastInput))
+            {
+                if (dustEffect.isPlaying)
+                {
+                    dustEffect.Stop();
+                }
+            }
+            else
+            {
+                if (!dustEffect.isPlaying)
+                {
+                    dustEffect.Play();
+                }
+            }
         }
 
         if (!isTweening)
@@ -108,12 +125,16 @@ public class PacStudentController : MonoBehaviour, ITweenableObject
             case Vector2 dir when dir.Equals(Vector2.right):
                 transform.rotation = Quaternion.Euler(Vector3.zero);
                 transform.localScale = Vector3.one;
+                dustEffect.transform.localScale = Vector3.one;
                 break;
             case Vector2 dir when dir.Equals(Vector2.left):
                 transform.rotation = Quaternion.Euler(Vector3.zero);
                 Vector3 scale = Vector3.one;
                 scale.x = -1.0f;
                 transform.localScale = scale;
+                Vector3 flipY = Vector3.one;
+                flipY.y = -1.0f;
+                dustEffect.transform.localScale = flipY;
                 break;
             case Vector2 dir when dir.Equals(Vector2.up):
                 Vector3 newScaleUp = transform.localScale;
@@ -124,6 +145,7 @@ public class PacStudentController : MonoBehaviour, ITweenableObject
                 }
                 transform.localScale = newScaleUp;
                 transform.rotation = Quaternion.Euler(Vector3.forward * 90.0f);
+                //dustEffect.transform.localScale = Vector3.one;
                 break;
             case Vector2 dir when dir.Equals(Vector2.down):
                 Vector3 newScaleDown = transform.localScale;
@@ -134,6 +156,7 @@ public class PacStudentController : MonoBehaviour, ITweenableObject
                 }
                 transform.localScale = newScaleDown;
                 transform.rotation = Quaternion.Euler(Vector3.forward * -90.0f);
+                //dustEffect.transform.localScale = Vector3.one;
                 break;
         }
     }
