@@ -124,6 +124,7 @@ public class PacStudentController : MonoBehaviour, ITweenableObject
                 if (!gridManager.PositionIsMoveable(this.gridPos + lastInput) && !gridManager.PositionIsMoveable(gridPos))
                 {
                     audioManager.StopSoundEffects();
+                    audioManager.CollideWithWall();
                 }
                 break;
         }

@@ -9,9 +9,11 @@ public class AudioManager : MonoBehaviour
 
     [SerializeField] private AudioSource soundEffectPlayer;
     [SerializeField] private AudioSource musicPlayer;
+    [SerializeField] private AudioSource wallHitPlayer;
 
     private bool eatingPellet = false;
     private bool moving = false;
+    private bool atWall = false;
 
     public void PlayMoveSound()
     {
@@ -19,6 +21,7 @@ public class AudioManager : MonoBehaviour
         {
             moving = true;
             eatingPellet = false;
+            atWall = false;
             soundEffectPlayer.clip = soundEffects[0];
             soundEffectPlayer.volume = 0.25f;
             soundEffectPlayer.loop = true;
@@ -32,6 +35,7 @@ public class AudioManager : MonoBehaviour
         {
             eatingPellet = true;
             moving = false;
+            atWall = false;
             soundEffectPlayer.clip = soundEffects[1];
             soundEffectPlayer.volume = 0.35f;
             soundEffectPlayer.loop = true;
@@ -39,13 +43,15 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public IEnumerator CollideWithWall()
+    public void CollideWithWall()
     {
-        soundEffectPlayer.clip = soundEffects[2];
-        soundEffectPlayer.loop = false;
-        soundEffectPlayer.Play();
-        yield return new WaitForSeconds(soundEffects[2].length);
-        PlayMoveSound();
+        if (!atWall)
+        {
+            atWall = true;
+            moving = false;
+            eatingPellet = false;
+            wallHitPlayer.Play();
+        }
     }
 
     public void PacmanDeath() //update this method when the game has actually been made
