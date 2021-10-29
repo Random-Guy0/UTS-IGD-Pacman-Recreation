@@ -2,57 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class GhostController : MonoBehaviour //write subclasses for differing ghost behaviour
+public class GhostController : MonoBehaviour
 {
     [SerializeField] private GhostEyesDirection eyes;
     [SerializeField] private Animator animator;
     [SerializeField] private SpriteRenderer rend;
 
-    [SerializeField] private float startingScaredTime;
-    [SerializeField] private float startingFlashingTime;
-
-    private bool isDead = false;
-
     private Vector2 direction;
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private Vector2 CalculateDirection(Vector2 previousDirection)
     {
-        if (collision.gameObject.CompareTag("Wall"))
-        {
-            direction = CalculateDirection(direction);
-            eyes.SetEyeDirection(direction);
-        }
-
-        if (collision.gameObject.CompareTag("GhostHouse") && isDead) 
-        {
-            rend.enabled = true;
-            isDead = false;
-        }
+        return Vector2.zero;
     }
 
-    protected abstract Vector2 CalculateDirection(Vector2 previousDirection);
-
-    public void PowerPelletCollected()
+    public void ScaredState()
     {
         animator.SetTrigger("isScared");
-        CancelInvoke();
-        Invoke("FlashingState", startingScaredTime);
     }
 
-    public void FlashingState()
+    public void RecoveringState()
     {
-        animator.SetTrigger("isFlashing");
-        Invoke("ReturnToNormal", startingFlashingTime);
+        animator.SetTrigger("isRecovering");
     }
 
-    public void ReturnToNormal()
+    public void WalkingState()
     {
         animator.SetTrigger("returnToNormal");
-    }
-
-    public void Dead()
-    {
-        rend.enabled = false;
-        isDead = true;
     }
 }

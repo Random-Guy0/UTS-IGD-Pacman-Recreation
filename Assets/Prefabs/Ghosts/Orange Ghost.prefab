@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 659340812762129877}
   - component: {fileID: 659340812762129872}
   - component: {fileID: 659340812762129875}
+  - component: {fileID: 4061390140740485511}
   m_Layer: 0
   m_Name: Orange Ghost
   m_TagString: Untagged
@@ -104,6 +105,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4061390140740485511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 659340812762129876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3a3d0b39ab65fb4eb17e8945f2542c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eyes: {fileID: 6084962285504464281}
+  animator: {fileID: 659340812762129875}
+  rend: {fileID: 659340812762129872}
 --- !u!1001 &952665007171888740
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -174,6 +190,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 296948676199845164, guid: 685cf336ab4257f4382af7b948494302, type: 3}
   m_PrefabInstance: {fileID: 952665007171888740}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6084962285504464281 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6434143254346228733, guid: 685cf336ab4257f4382af7b948494302, type: 3}
+  m_PrefabInstance: {fileID: 952665007171888740}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc112789081fbc440b55c05afe7bf893, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2153784657612129318
 PrefabInstance:
   m_ObjectHideFlags: 0

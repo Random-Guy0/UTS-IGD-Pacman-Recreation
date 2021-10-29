@@ -214,5 +214,12 @@ public class PacStudentController : MonoBehaviour, ITweenableObject
             tweener.CancelTween(collision.gameObject.transform);
             Destroy(collision.gameObject);
         }
+        else if(collision.CompareTag("Power Pellet"))
+        {
+            gameManager.CollectPowerPellet();
+            Vector2 pos = collision.gameObject.transform.position;
+            Destroy(collision.gameObject);
+            gridManager.AddEmptySpace(pos);
+        }
     }
 }
