@@ -56,4 +56,38 @@ public class Tweener : MonoBehaviour
 
         return result;
     }
+
+    private Tween FindTween(Transform target)
+    {
+        Tween result = null;
+        foreach (Tween tween in activeTweens)
+        {
+            if (tween.Target == target)
+            {
+                result = tween;
+                break;
+            }
+        }
+
+        return result;
+    }
+
+    public bool CancelTween(Tween tween)
+    {
+        if (tween != null)
+        {
+            activeTweens.Remove(tween);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public bool CancelTween(Transform target)
+    {
+        Tween tween = FindTween(target);
+        return CancelTween(tween);
+    }
 }

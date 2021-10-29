@@ -11,5 +11,6 @@ public enum GridObjectType
     InsideWall, 
     Pellet, 
     PowerPellet, 
-    TJunction 
+    TJunction,
+    Teleporter
 }

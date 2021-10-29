@@ -50,7 +50,7 @@ public class PacStudentController : MonoBehaviour, ITweenableObject
         {
             PlaySoundEffect(gridPos + currentInput);
 
-            if (!gridManager.PositionIsMoveable(gridPos + currentInput) && !gridManager.PositionIsMoveable(gridPos + lastInput))
+            if (!gridManager.PacStudentPositionIsMoveable(gridPos + currentInput) && !gridManager.PacStudentPositionIsMoveable(gridPos + lastInput))
             {
                 if (dustEffect.isPlaying)
                 {
@@ -78,7 +78,7 @@ public class PacStudentController : MonoBehaviour, ITweenableObject
 
         if (!isTweening)
         {
-            if (gridManager.PositionIsMoveable(gridPos + lastInput))
+            if (gridManager.PacStudentPositionIsMoveable(gridPos + lastInput))
             {
                 currentInput = lastInput;
 
@@ -86,7 +86,7 @@ public class PacStudentController : MonoBehaviour, ITweenableObject
                 animator.SetFloat("Moving", 1.0f);
                 tweener.AddTween(transform, transform.position, GridManager.GridToGlobalPosition(gridPos + currentInput), 1.0f / speed, this);
             }
-            else if (gridManager.PositionIsMoveable(gridPos + currentInput))
+            else if (gridManager.PacStudentPositionIsMoveable(gridPos + currentInput))
             {
 
                 isTweening = true;
@@ -121,7 +121,7 @@ public class PacStudentController : MonoBehaviour, ITweenableObject
             case GridObjectType.InsideWall:
             case GridObjectType.OutsideCorner:
             case GridObjectType.OutsideWall:
-                if (!gridManager.PositionIsMoveable(this.gridPos + lastInput) && !gridManager.PositionIsMoveable(gridPos))
+                if (!gridManager.PacStudentPositionIsMoveable(this.gridPos + lastInput) && !gridManager.PacStudentPositionIsMoveable(gridPos))
                 {
                     audioManager.StopSoundEffects();
                     audioManager.CollideWithWall();
@@ -170,6 +170,26 @@ public class PacStudentController : MonoBehaviour, ITweenableObject
                 transform.localScale = newScaleDown;
                 transform.rotation = Quaternion.Euler(Vector3.forward * -90.0f);
                 break;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Teleporter"))
+        {
+            tweener.CancelTween(transform);
+            if (transform.position.x < 0.0f)
+            {
+                Vector2 startPos = new Vector2(13.5f, 0.0f);
+                Vector2 endPos = new Vector2(12.5f, 0.0f);
+                tweener.AddTween(transform, startPos, endPos, 1.0f / speed, this);
+            }
+            else
+            {
+                Vector2 startPos = new Vector2(-13.5f, 0.0f);
+                Vector2 endPos = new Vector2(-12.5f, 0.0f);
+                tweener.AddTween(transform, startPos, endPos, 1.0f / speed, this);
+            }
         }
     }
 }

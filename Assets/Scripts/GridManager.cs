@@ -18,14 +18,14 @@ public class GridManager : MonoBehaviour
 
     private void Start()
     {
-        grid = new GridObject[28, 29];
+        grid = new GridObject[30, 29];
 
         GridObject[] unsortedGrid = FindObjectsOfType<GridObject>();
 
         foreach(GridObject gridObject in unsortedGrid)
         {
             gridObject.SetGridPos();
-            grid[(int)gridObject.GridPos.x + 13, (int)gridObject.GridPos.y + 14] = gridObject;
+            grid[(int)gridObject.GridPos.x + 14, (int)gridObject.GridPos.y + 14] = gridObject;
         }
 
         for(int i = 0; i < grid.GetLength(0); i++)
@@ -35,7 +35,7 @@ public class GridManager : MonoBehaviour
                 if(grid[i, j] == null)
                 {
                     GameObject emptySpace = new GameObject("emptySpace");
-                    emptySpace.transform.position = GridToGlobalPosition(new Vector2(i - 13, j - 14));
+                    emptySpace.transform.position = GridToGlobalPosition(new Vector2(i - 14, j - 14));
                     GridObject emptyGrid = emptySpace.AddComponent<GridObject>();
                     emptyGrid.SetGridPos();
                     grid[i, j] = emptyGrid;
@@ -46,10 +46,10 @@ public class GridManager : MonoBehaviour
 
     public GridObject GetGridAtPosition(Vector2 gridPos)
     {
-        return  grid[(int)gridPos.x + 13, (int)gridPos.y + 14];
+        return  grid[(int)gridPos.x + 14, (int)gridPos.y + 14];
     }
 
-    public bool PositionIsMoveable(Vector2 gridPos)
+    public bool PacStudentPositionIsMoveable(Vector2 gridPos)
     {
         GridObject selectedGrid = GetGridAtPosition(gridPos);
 
@@ -60,6 +60,6 @@ public class GridManager : MonoBehaviour
 
     public GridObjectType GetGridObjectType(Vector2 gridPos)
     {
-        return grid[(int)gridPos.x + 13, (int)gridPos.y + 14].ObjectType;
+        return grid[(int)gridPos.x + 14, (int)gridPos.y + 14].ObjectType;
     }
 }
