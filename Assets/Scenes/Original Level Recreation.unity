@@ -9887,6 +9887,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7846858870488901578, guid: 703a9148d4647964eaf07932ba554d97, type: 3}
   m_PrefabInstance: {fileID: 503312109}
   m_PrefabAsset: {fileID: 0}
+--- !u!198 &508600642 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 4987710835048688057, guid: c4ce944ce14ea464f86f6d9730fa8a51, type: 3}
+  m_PrefabInstance: {fileID: 6266983713008124259}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &511843432
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -44325,6 +44330,10 @@ PrefabInstance:
       propertyPath: audioManager
       value: 
       objectReference: {fileID: 1451920083}
+    - target: {fileID: 5325137871926582213, guid: c4ce944ce14ea464f86f6d9730fa8a51, type: 3}
+      propertyPath: wallHitEffect
+      value: 
+      objectReference: {fileID: 508600642}
     - target: {fileID: 6266983713255607621, guid: c4ce944ce14ea464f86f6d9730fa8a51, type: 3}
       propertyPath: m_RootOrder
       value: 3
