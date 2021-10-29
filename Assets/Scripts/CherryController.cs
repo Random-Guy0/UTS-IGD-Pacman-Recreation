@@ -10,6 +10,8 @@ public class CherryController : MonoBehaviour
 
     private Camera cam;
 
+    private GameObject currentCherry;
+
     private void Start()
     {
         Invoke("SpawnCherry", 10.0f);
@@ -41,8 +43,16 @@ public class CherryController : MonoBehaviour
                 break;
         }
 
-        Instantiate(cherry, startPos, Quaternion.identity);
+        currentCherry = Instantiate(cherry, startPos, Quaternion.identity);
+        Vector2 endPos = -startPos;
+        tweener.AddTween(currentCherry.transform, startPos, endPos, duration, null);
 
+        Invoke("DestroyCherry", duration + 0.1f);
         Invoke("SpawnCherry", 10.0f);
+    }
+
+    private void DestroyCherry()
+    {
+        Destroy(currentCherry);
     }
 }
