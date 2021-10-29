@@ -11,6 +11,7 @@ public class PacStudentController : MonoBehaviour, ITweenableObject
     [SerializeField] private Animator animator;
     [SerializeField] private ParticleSystem dustEffect;
     [SerializeField] private ParticleSystem wallHitEffect;
+    [SerializeField] private GameManager gameManager;
     [SerializeField] private float speed;
 
     private Vector2 gridPos;
@@ -21,6 +22,7 @@ public class PacStudentController : MonoBehaviour, ITweenableObject
     private PlayerInput input;
 
     private bool isTweening;
+    private bool atWall;
 
     private void Start()
     {
@@ -32,6 +34,7 @@ public class PacStudentController : MonoBehaviour, ITweenableObject
         currentInput = new Vector2();
 
         isTweening = false;
+        atWall = false;
     }
 
     private void Update()
@@ -48,7 +51,6 @@ public class PacStudentController : MonoBehaviour, ITweenableObject
 
         if (currentInput != Vector2.zero)
         {
-            PlaySoundEffect(gridPos + currentInput);
 
             if (!gridManager.PacStudentPositionIsMoveable(gridPos + currentInput) && !gridManager.PacStudentPositionIsMoveable(gridPos + lastInput))
             {
@@ -57,8 +59,9 @@ public class PacStudentController : MonoBehaviour, ITweenableObject
                     dustEffect.Stop();
                 }
 
-                if(!wallHitEffect.isPlaying)
+                if(!atWall)
                 {
+                    atWall = true;
                     wallHitEffect.Play();
                 }
             }
@@ -69,8 +72,9 @@ public class PacStudentController : MonoBehaviour, ITweenableObject
                     dustEffect.Play();
                 }
 
-                if(wallHitEffect.isPlaying)
+                if(atWall)
                 {
+                    atWall = false;
                     wallHitEffect.Stop();
                 }
             }
@@ -94,6 +98,11 @@ public class PacStudentController : MonoBehaviour, ITweenableObject
                 tweener.AddTween(transform, transform.position, GridManager.GridToGlobalPosition(gridPos + currentInput), 1.0f / speed, this);
             }
             RotatePacStudent(currentInput);
+
+            if (currentInput != Vector2.zero)
+            {
+                PlaySoundEffect(gridPos + currentInput);
+            }
         }
     }
 
@@ -190,6 +199,20 @@ public class PacStudentController : MonoBehaviour, ITweenableObject
                 Vector2 endPos = new Vector2(-12.5f, 0.0f);
                 tweener.AddTween(transform, startPos, endPos, 1.0f / speed, this);
             }
+        }
+        else if(collision.CompareTag("Pellet"))
+        {
+            gameManager.AddScore(10);
+            Vector2 pos = collision.gameObject.transform.position;
+            Destroy(collision.gameObject);
+            gridManager.AddEmptySpace(pos);
+        }
+        else if(collision.CompareTag("Cherry"))
+        {
+            audioManager.CollectCherry();
+            gameManager.AddScore(100);
+            tweener.CancelTween(collision.gameObject.transform);
+            Destroy(collision.gameObject);
         }
     }
 }

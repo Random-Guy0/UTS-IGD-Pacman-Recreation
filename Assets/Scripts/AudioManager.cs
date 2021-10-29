@@ -10,6 +10,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource soundEffectPlayer;
     [SerializeField] private AudioSource musicPlayer;
     [SerializeField] private AudioSource wallHitPlayer;
+    [SerializeField] private AudioSource cherrySoundPlayer;
 
     private bool eatingPellet = false;
     private bool moving = false;
@@ -94,5 +95,10 @@ public class AudioManager : MonoBehaviour
         eatingPellet = false;
         soundEffectPlayer.loop = false;
         soundEffectPlayer.Stop();
+    }
+
+    public void CollectCherry()
+    {
+        cherrySoundPlayer.Play();
     }
 }

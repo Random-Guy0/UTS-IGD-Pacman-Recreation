@@ -13,4 +13,9 @@ public class GridObject : MonoBehaviour
     {
         GridPos = GridManager.GlobalPositionToGrid(transform.position);
     }
+
+    public void SetObjectType(GridObjectType type)
+    {
+        objectType = (int)type;
+    }
 }

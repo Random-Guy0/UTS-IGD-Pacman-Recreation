@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
+    [SerializeField] private GameObject emptySpace;
+
     private GridObject[,] grid;
 
     public static Vector2 GlobalPositionToGrid(Vector2 globalPos)
@@ -34,11 +36,7 @@ public class GridManager : MonoBehaviour
             {
                 if(grid[i, j] == null)
                 {
-                    GameObject emptySpace = new GameObject("emptySpace");
-                    emptySpace.transform.position = GridToGlobalPosition(new Vector2(i - 14, j - 14));
-                    GridObject emptyGrid = emptySpace.AddComponent<GridObject>();
-                    emptyGrid.SetGridPos();
-                    grid[i, j] = emptyGrid;
+                    AddEmptySpace(GridToGlobalPosition(new Vector2(i - 14, j - 14)));
                 }
             }
         }
@@ -61,5 +59,14 @@ public class GridManager : MonoBehaviour
     public GridObjectType GetGridObjectType(Vector2 gridPos)
     {
         return grid[(int)gridPos.x + 14, (int)gridPos.y + 14].ObjectType;
+    }
+
+    public GameObject AddEmptySpace(Vector2 pos)
+    {
+        GameObject emptySpace = Instantiate(this.emptySpace, pos, Quaternion.identity);
+        GridObject emptyGrid = emptySpace.GetComponent<GridObject>();
+        emptyGrid.SetGridPos();
+        grid[(int)emptyGrid.GridPos.x + 14, (int)emptyGrid.GridPos.y + 14] = emptyGrid;
+        return emptySpace;
     }
 }
