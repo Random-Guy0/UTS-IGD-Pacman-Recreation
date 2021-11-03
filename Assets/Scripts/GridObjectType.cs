@@ -12,5 +12,7 @@ public enum GridObjectType
     Pellet, 
     PowerPellet, 
     TJunction,
-    Teleporter
+    Teleporter,
+    GhostHouseExit,
+    GhostHouseInterior
 }

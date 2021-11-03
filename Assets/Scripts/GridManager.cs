@@ -52,8 +52,9 @@ public class GridManager : MonoBehaviour
         GridObject selectedGrid = GetGridAtPosition(gridPos);
 
         return selectedGrid.ObjectType != GridObjectType.InsideCorner && selectedGrid.ObjectType != GridObjectType.InsideWall
-            && selectedGrid.ObjectType != GridObjectType.OutsideCorner && selectedGrid.ObjectType != GridObjectType.OutsideWall 
-            && selectedGrid.ObjectType != GridObjectType.TJunction;
+            && selectedGrid.ObjectType != GridObjectType.OutsideCorner && selectedGrid.ObjectType != GridObjectType.OutsideWall
+            && selectedGrid.ObjectType != GridObjectType.TJunction && selectedGrid.ObjectType != GridObjectType.GhostHouseExit
+            && selectedGrid.ObjectType != GridObjectType.GhostHouseInterior;
     }
 
     public GridObjectType GetGridObjectType(Vector2 gridPos)
