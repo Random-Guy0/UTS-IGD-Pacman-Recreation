@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,20 +18,23 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject startCountdown;
     [SerializeField] private TMP_Text startCountdownText;
     [SerializeField] private PacStudentController pacStudent;
+    [SerializeField] private GameObject gameOverTxt;
 
     private int score;
     private int scaredCountdown;
     private int lives;
-    private bool gameStarted;
+    private bool gameInProgress;
     private float startTime;
     private int gameStartCountdown;
+    private int pelletCount;
 
     private void Start()
     {
         score = 0;
         scoreText.text = score.ToString();
         lives = 3;
-        gameStarted = false;
+        gameInProgress = false;
+        pelletCount = 218;
 
         gameStartCountdown = 3;
         startCountdownText.text = gameStartCountdown.ToString();
@@ -101,11 +105,16 @@ public class GameManager : MonoBehaviour
     {
         lives--;
         Destroy(lifeIndicators[lives]);
+
+        if(lives == 0)
+        {
+            GameOver();
+        }
     }
 
     private void UpdateGameTimer()
     {
-        if(gameStarted)
+        if(gameInProgress)
         {
             gameTimer.text = TimeSpan.FromSeconds(Time.time - startTime).ToString(@"mm\:ss\:ff");
         }
@@ -114,7 +123,7 @@ public class GameManager : MonoBehaviour
     private void StartGame()
     {
         startCountdown.SetActive(false);
-        gameStarted = true;
+        gameInProgress = true;
         startTime = Time.time;
         pacStudent.enabled = true;
         foreach(GhostController ghost in ghosts)
@@ -139,5 +148,46 @@ public class GameManager : MonoBehaviour
             startCountdownText.text = "GO!";
             Invoke("StartGame", 1.0f);
         }
+    }
+
+    public void EatPellet()
+    {
+        pelletCount--;
+        AddScore(10);
+
+        if(pelletCount == 0)
+        {
+            GameOver();
+        }
+    }
+
+    private void GameOver()
+    {
+        gameOverTxt.SetActive(true);
+        pacStudent.enabled = false;
+        foreach (GhostController ghost in ghosts)
+        {
+            ghost.enabled = false;
+        }
+        gameInProgress = false;
+
+        float finalTime = Time.time - startTime;
+
+        int previousHighScore = PlayerPrefs.GetInt("HighScore", 0);
+        float previousBestTime = PlayerPrefs.GetFloat("BestTime", float.MaxValue);
+
+        if (score > previousHighScore || (score == previousHighScore && finalTime < previousBestTime))
+        {
+            PlayerPrefs.SetInt("HighScore", score);
+            PlayerPrefs.SetFloat("BestTime", finalTime);
+            PlayerPrefs.Save();
+        }
+
+        Invoke("ReturnToStartScene", 3.0f);
+    }
+
+    private void ReturnToStartScene()
+    {
+        SceneManager.LoadSceneAsync(0);
     }
 }

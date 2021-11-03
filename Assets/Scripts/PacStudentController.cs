@@ -204,7 +204,7 @@ public class PacStudentController : MonoBehaviour, ITweenableObject
         }
         else if(collision.CompareTag("Pellet"))
         {
-            gameManager.AddScore(10);
+            gameManager.EatPellet();
             Vector2 pos = collision.gameObject.transform.position;
             Destroy(collision.gameObject);
             gridManager.AddEmptySpace(pos);
