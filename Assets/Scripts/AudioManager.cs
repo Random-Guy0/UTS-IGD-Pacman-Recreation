@@ -65,6 +65,13 @@ public class AudioManager : MonoBehaviour
         pacmanDeathPlayer.Play();
     }
 
+    public void IntroMusic()
+    {
+        musicPlayer.clip = music[0];
+        musicPlayer.loop = false;
+        musicPlayer.Play();
+    }
+
     public void GhostNormalState()
     {
         musicPlayer.clip = music[1];

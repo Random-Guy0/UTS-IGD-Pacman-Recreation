@@ -14,12 +14,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] private AudioManager audioManager;
     [SerializeField] private GameObject[] lifeIndicators;
     [SerializeField] private TMP_Text gameTimer;
+    [SerializeField] private GameObject startCountdown;
+    [SerializeField] private TMP_Text startCountdownText;
+    [SerializeField] private PacStudentController pacStudent;
 
     private int score;
     private int scaredCountdown;
     private int lives;
     private bool gameStarted;
     private float startTime;
+    private int gameStartCountdown;
 
     private void Start()
     {
@@ -27,7 +31,11 @@ public class GameManager : MonoBehaviour
         scoreText.text = score.ToString();
         lives = 3;
         gameStarted = false;
-        StartGame();
+
+        gameStartCountdown = 3;
+        startCountdownText.text = gameStartCountdown.ToString();
+        audioManager.IntroMusic();
+        Invoke("GameStartCountdown", 1.0f);
     }
 
     private void Update()
@@ -78,7 +86,7 @@ public class GameManager : MonoBehaviour
                 ghost.WalkingState();
             }
             ghostScaredCountdown.SetActive(false);
-            audioManager.StopMusic();
+            audioManager.GhostNormalState();
         }
 
         ghostScaredCountdownText.text = scaredCountdown.ToString();
@@ -105,7 +113,31 @@ public class GameManager : MonoBehaviour
 
     private void StartGame()
     {
+        startCountdown.SetActive(false);
         gameStarted = true;
         startTime = Time.time;
+        pacStudent.enabled = true;
+        foreach(GhostController ghost in ghosts)
+        {
+            ghost.enabled = true;
+        }
+
+        audioManager.GhostNormalState();
+    }
+
+    private void GameStartCountdown()
+    {
+        gameStartCountdown--;
+
+        if (gameStartCountdown > 0)
+        {
+            startCountdownText.text = gameStartCountdown.ToString();
+            Invoke("GameStartCountdown", 1.0f);
+        }
+        else
+        {
+            startCountdownText.text = "GO!";
+            Invoke("StartGame", 1.0f);
+        }
     }
 }
