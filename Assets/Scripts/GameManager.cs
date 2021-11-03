@@ -10,14 +10,18 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GhostController[] ghosts;
     [SerializeField] private GameObject ghostScaredCountdown;
     [SerializeField] private TMP_Text ghostScaredCountdownText;
+    [SerializeField] private AudioManager audioManager;
+    [SerializeField] private GameObject[] lifeIndicators;
 
     private int score;
     private int scaredCountdown;
+    private int lives;
 
     private void Start()
     {
         score = 0;
         scoreText.text = score.ToString();
+        lives = 3;
     }
 
     public void AddScore(int points)
@@ -28,6 +32,7 @@ public class GameManager : MonoBehaviour
 
     public void CollectPowerPellet()
     {
+        audioManager.GhostScaredState();
         ghostScaredCountdown.SetActive(true);
         scaredCountdown = 10;
         ghostScaredCountdownText.text = scaredCountdown.ToString();
@@ -35,6 +40,7 @@ public class GameManager : MonoBehaviour
         {
             ghost.ScaredState();
         }
+        CancelInvoke("GhostCountdown");
         Invoke("GhostCountdown", 1.0f);
     }
 
@@ -61,8 +67,20 @@ public class GameManager : MonoBehaviour
                 ghost.WalkingState();
             }
             ghostScaredCountdown.SetActive(false);
+            audioManager.StopMusic();
         }
 
         ghostScaredCountdownText.text = scaredCountdown.ToString();
+    }
+
+    public bool HasLives()
+    {
+        return lives > 0;
+    }
+
+    public void LoseLife()
+    {
+        lives--;
+        Destroy(lifeIndicators[lives]);
     }
 }

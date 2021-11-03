@@ -5022,7 +5022,10 @@ MonoBehaviour:
   animator: {fileID: 6266983713255607620}
   dustEffect: {fileID: 381114034166760381}
   wallHitEffect: {fileID: 4987710835048688057}
+  deathEffect: {fileID: 224087125288077376, guid: e8eba11d9c45e344b82b1230739d2c04, type: 3}
+  gameManager: {fileID: 0}
   speed: 3.5
+  rend: {fileID: 6266983713255607622}
 --- !u!50 &974797375695110597
 Rigidbody2D:
   serializedVersion: 4

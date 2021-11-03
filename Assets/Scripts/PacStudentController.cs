@@ -11,8 +11,10 @@ public class PacStudentController : MonoBehaviour, ITweenableObject
     [SerializeField] private Animator animator;
     [SerializeField] private ParticleSystem dustEffect;
     [SerializeField] private ParticleSystem wallHitEffect;
+    [SerializeField] private ParticleSystem deathEffect;
     [SerializeField] private GameManager gameManager;
     [SerializeField] private float speed;
+    [SerializeField] private SpriteRenderer rend;
 
     private Vector2 gridPos;
 
@@ -220,6 +222,33 @@ public class PacStudentController : MonoBehaviour, ITweenableObject
             Vector2 pos = collision.gameObject.transform.position;
             Destroy(collision.gameObject);
             gridManager.AddEmptySpace(pos);
+        }
+        else if(collision.CompareTag("Ghost"))
+        {
+            GhostState state = collision.GetComponent<GhostController>().State;
+            if(state == GhostState.Walking)
+            {
+                tweener.CancelTween(transform);
+                Instantiate(deathEffect, transform.position, Quaternion.identity);
+                gameManager.LoseLife();
+                audioManager.PacmanDeath();
+
+                if(gameManager.HasLives())
+                {
+                    transform.position = new Vector2(-12.5f, 13.0f);
+                }
+                else
+                {
+                    rend.enabled = false;
+                }
+                lastInput = Vector2.zero;
+                currentInput = Vector2.zero;
+                gridPos = GridManager.GlobalPositionToGrid(transform.position);
+                isTweening = false;
+                transform.rotation = Quaternion.identity;
+                animator.SetFloat("Moving", 0.0f);
+                dustEffect.Stop();
+            }
         }
     }
 }

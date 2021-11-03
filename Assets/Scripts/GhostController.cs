@@ -8,7 +8,14 @@ public class GhostController : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private SpriteRenderer rend;
 
+    public GhostState State { get; private set; }
+
     private Vector2 direction;
+
+    private void Start()
+    {
+        State = GhostState.Walking;
+    }
 
     private Vector2 CalculateDirection(Vector2 previousDirection)
     {
@@ -18,15 +25,20 @@ public class GhostController : MonoBehaviour
     public void ScaredState()
     {
         animator.SetTrigger("isScared");
+        eyes.gameObject.SetActive(false);
+        State = GhostState.Scared;
     }
 
     public void RecoveringState()
     {
         animator.SetTrigger("isRecovering");
+        State = GhostState.Recovering;
     }
 
     public void WalkingState()
     {
         animator.SetTrigger("returnToNormal");
+        eyes.gameObject.SetActive(true);
+        State = GhostState.Walking;
     }
 }

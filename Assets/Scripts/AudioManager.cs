@@ -11,6 +11,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource musicPlayer;
     [SerializeField] private AudioSource wallHitPlayer;
     [SerializeField] private AudioSource cherrySoundPlayer;
+    [SerializeField] private AudioSource pacmanDeathPlayer;
 
     private bool eatingPellet = false;
     private bool moving = false;
@@ -55,12 +56,13 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void PacmanDeath() //update this method when the game has actually been made
+    public void PacmanDeath()
     {
-        musicPlayer.Stop();
-        soundEffectPlayer.clip = soundEffects[3];
-        soundEffectPlayer.loop = false;
-        soundEffectPlayer.Play();
+        atWall = false;
+        moving = false;
+        eatingPellet = false;
+        soundEffectPlayer.Stop();
+        pacmanDeathPlayer.Play();
     }
 
     public void GhostNormalState()
@@ -100,5 +102,10 @@ public class AudioManager : MonoBehaviour
     public void CollectCherry()
     {
         cherrySoundPlayer.Play();
+    }
+
+    public void StopMusic()
+    {
+        musicPlayer.Stop();
     }
 }
