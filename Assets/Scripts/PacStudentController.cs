@@ -225,7 +225,8 @@ public class PacStudentController : MonoBehaviour, ITweenableObject
         }
         else if(collision.CompareTag("Ghost"))
         {
-            GhostState state = collision.GetComponent<GhostController>().State;
+            GhostController ghost = collision.GetComponent<GhostController>();
+            GhostState state = ghost.State;
             if(state == GhostState.Walking)
             {
                 tweener.CancelTween(transform);
@@ -248,6 +249,12 @@ public class PacStudentController : MonoBehaviour, ITweenableObject
                 transform.rotation = Quaternion.identity;
                 animator.SetFloat("Moving", 0.0f);
                 dustEffect.Stop();
+            }
+            else if(state == GhostState.Scared || state == GhostState.Recovering)
+            {
+                ghost.DeadState();
+                audioManager.GhostDeadState();
+                gameManager.AddScore(300);
             }
         }
     }

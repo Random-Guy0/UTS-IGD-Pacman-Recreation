@@ -37,8 +37,26 @@ public class GhostController : MonoBehaviour
 
     public void WalkingState()
     {
-        animator.SetTrigger("returnToNormal");
+        if (State != GhostState.Dead)
+        {
+            animator.SetTrigger("returnToNormal");
+            eyes.gameObject.SetActive(true);
+            State = GhostState.Walking;
+        }
+    }
+
+    public void DeadState()
+    {
+        State = GhostState.Dead;
+        rend.enabled = false;
         eyes.gameObject.SetActive(true);
+        Invoke("Respawn", 5.0f);
+    }
+
+    private void Respawn()
+    {
+        animator.SetTrigger("returnToNormal");
+        rend.enabled = true;
         State = GhostState.Walking;
     }
 }

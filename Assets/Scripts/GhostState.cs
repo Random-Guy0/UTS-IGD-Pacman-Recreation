@@ -8,5 +8,4 @@ public enum GhostState
     Scared,
     Recovering,
     Dead,
-    Spawning
 }
