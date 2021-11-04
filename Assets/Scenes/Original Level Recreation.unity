@@ -46439,6 +46439,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4061390140740485511, guid: 4cce7a4af323f8747bbddc5cc7642a75, type: 3}
+      propertyPath: tweener
+      value: 
+      objectReference: {fileID: 684489534}
+    - target: {fileID: 4061390140740485511, guid: 4cce7a4af323f8747bbddc5cc7642a75, type: 3}
+      propertyPath: gridManager
+      value: 
+      objectReference: {fileID: 686316143}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4cce7a4af323f8747bbddc5cc7642a75, type: 3}
 --- !u!1001 &5595153971332263537
@@ -46448,6 +46456,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1476458011}
     m_Modifications:
+    - target: {fileID: -3139865956851778379, guid: 26b3ff79b5c1903458f4a8fdf791d0e5, type: 3}
+      propertyPath: tweener
+      value: 
+      objectReference: {fileID: 684489534}
+    - target: {fileID: -3139865956851778379, guid: 26b3ff79b5c1903458f4a8fdf791d0e5, type: 3}
+      propertyPath: gridManager
+      value: 
+      objectReference: {fileID: 686316143}
     - target: {fileID: 5595153971204568490, guid: 26b3ff79b5c1903458f4a8fdf791d0e5, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -46583,6 +46599,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1476458011}
     m_Modifications:
+    - target: {fileID: -1871820881530016444, guid: 2d634805ac21c8944a5dd57a36d24ba2, type: 3}
+      propertyPath: tweener
+      value: 
+      objectReference: {fileID: 684489534}
+    - target: {fileID: -1871820881530016444, guid: 2d634805ac21c8944a5dd57a36d24ba2, type: 3}
+      propertyPath: gridManager
+      value: 
+      objectReference: {fileID: 686316143}
     - target: {fileID: 8806201828735417723, guid: 2d634805ac21c8944a5dd57a36d24ba2, type: 3}
       propertyPath: m_FlipX
       value: 0
@@ -46652,6 +46676,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1476458011}
     m_Modifications:
+    - target: {fileID: 6780128338512182606, guid: 23973d22e9b43e347a1729b9d7b1834e, type: 3}
+      propertyPath: tweener
+      value: 
+      objectReference: {fileID: 684489534}
+    - target: {fileID: 6780128338512182606, guid: 23973d22e9b43e347a1729b9d7b1834e, type: 3}
+      propertyPath: gridManager
+      value: 
+      objectReference: {fileID: 686316143}
     - target: {fileID: 9135800060042637862, guid: 23973d22e9b43e347a1729b9d7b1834e, type: 3}
       propertyPath: m_RootOrder
       value: 3

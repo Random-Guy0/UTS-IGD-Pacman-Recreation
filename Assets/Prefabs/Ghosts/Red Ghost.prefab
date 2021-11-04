@@ -121,6 +121,9 @@ MonoBehaviour:
   eyes: {fileID: 1508514385289650977}
   animator: {fileID: 5595153971204568493}
   rend: {fileID: 5595153971204568492}
+  gridManager: {fileID: 0}
+  tweener: {fileID: 0}
+  speed: 4
 --- !u!61 &2118492684617091
 BoxCollider2D:
   m_ObjectHideFlags: 0

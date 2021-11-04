@@ -54,7 +54,7 @@ public class PacStudentController : MonoBehaviour, ITweenableObject
         if (currentInput != Vector2.zero)
         {
 
-            if (!gridManager.PacStudentPositionIsMoveable(gridPos + currentInput) && !gridManager.PacStudentPositionIsMoveable(gridPos + lastInput))
+            if (!gridManager.PositionIsMoveable(gridPos + currentInput) && !gridManager.PositionIsMoveable(gridPos + lastInput))
             {
                 if (dustEffect.isPlaying)
                 {
@@ -84,7 +84,7 @@ public class PacStudentController : MonoBehaviour, ITweenableObject
 
         if (!isTweening)
         {
-            if (gridManager.PacStudentPositionIsMoveable(gridPos + lastInput))
+            if (gridManager.PositionIsMoveable(gridPos + lastInput))
             {
                 currentInput = lastInput;
 
@@ -92,7 +92,7 @@ public class PacStudentController : MonoBehaviour, ITweenableObject
                 animator.SetFloat("Moving", 1.0f);
                 tweener.AddTween(transform, transform.position, GridManager.GridToGlobalPosition(gridPos + currentInput), 1.0f / speed, this);
             }
-            else if (gridManager.PacStudentPositionIsMoveable(gridPos + currentInput))
+            else if (gridManager.PositionIsMoveable(gridPos + currentInput))
             {
 
                 isTweening = true;
@@ -132,7 +132,7 @@ public class PacStudentController : MonoBehaviour, ITweenableObject
             case GridObjectType.InsideWall:
             case GridObjectType.OutsideCorner:
             case GridObjectType.OutsideWall:
-                if (!gridManager.PacStudentPositionIsMoveable(this.gridPos + lastInput) && !gridManager.PacStudentPositionIsMoveable(gridPos))
+                if (!gridManager.PositionIsMoveable(this.gridPos + lastInput) && !gridManager.PositionIsMoveable(gridPos))
                 {
                     audioManager.StopSoundEffects();
                     audioManager.CollideWithWall();
