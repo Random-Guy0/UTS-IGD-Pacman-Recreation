@@ -66,6 +66,12 @@ public class GridManager : MonoBehaviour
             && selectedGrid.ObjectType != GridObjectType.TJunction;
     }
 
+    public bool PositionIsMoveableGhost(Vector2 gridPos)
+    {
+        GridObject selectedGrid = GetGridAtPosition(gridPos);
+        return PositionIsMoveable(gridPos) && selectedGrid.ObjectType != GridObjectType.Teleporter;
+    }
+
     public GridObjectType GetGridObjectType(Vector2 gridPos)
     {
         return grid[(int)gridPos.x + 14, (int)gridPos.y + 14].ObjectType;
@@ -89,7 +95,7 @@ public class GridManager : MonoBehaviour
         {
             if(Vector2.Distance(pos, closestPos) > Vector2.Distance(pos, allObjects[i].transform.position))
             {
-                closestPos = allObjects[i].transform.position;
+                closestPos = GridToGlobalPosition(allObjects[i].GridPos);
             }
         }
 

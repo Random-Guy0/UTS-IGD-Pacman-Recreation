@@ -124,6 +124,8 @@ MonoBehaviour:
   gridManager: {fileID: 0}
   tweener: {fileID: 0}
   speed: 4
+  ghostNumber: 1
+  pacStudent: {fileID: 0}
 --- !u!61 &2118492684617091
 BoxCollider2D:
   m_ObjectHideFlags: 0

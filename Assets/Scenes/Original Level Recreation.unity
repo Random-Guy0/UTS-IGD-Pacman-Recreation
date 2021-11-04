@@ -46444,6 +46444,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 684489534}
     - target: {fileID: 4061390140740485511, guid: 4cce7a4af323f8747bbddc5cc7642a75, type: 3}
+      propertyPath: pacStudent
+      value: 
+      objectReference: {fileID: 6266983713008124260}
+    - target: {fileID: 4061390140740485511, guid: 4cce7a4af323f8747bbddc5cc7642a75, type: 3}
       propertyPath: gridManager
       value: 
       objectReference: {fileID: 686316143}
@@ -46460,6 +46464,10 @@ PrefabInstance:
       propertyPath: tweener
       value: 
       objectReference: {fileID: 684489534}
+    - target: {fileID: -3139865956851778379, guid: 26b3ff79b5c1903458f4a8fdf791d0e5, type: 3}
+      propertyPath: pacStudent
+      value: 
+      objectReference: {fileID: 6266983713008124260}
     - target: {fileID: -3139865956851778379, guid: 26b3ff79b5c1903458f4a8fdf791d0e5, type: 3}
       propertyPath: gridManager
       value: 
@@ -46592,6 +46600,11 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: c4ce944ce14ea464f86f6d9730fa8a51, type: 3}
+--- !u!4 &6266983713008124260 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6266983713255607621, guid: c4ce944ce14ea464f86f6d9730fa8a51, type: 3}
+  m_PrefabInstance: {fileID: 6266983713008124259}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8806201828136941293
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46603,6 +46616,10 @@ PrefabInstance:
       propertyPath: tweener
       value: 
       objectReference: {fileID: 684489534}
+    - target: {fileID: -1871820881530016444, guid: 2d634805ac21c8944a5dd57a36d24ba2, type: 3}
+      propertyPath: pacStudent
+      value: 
+      objectReference: {fileID: 6266983713008124260}
     - target: {fileID: -1871820881530016444, guid: 2d634805ac21c8944a5dd57a36d24ba2, type: 3}
       propertyPath: gridManager
       value: 
@@ -46680,6 +46697,10 @@ PrefabInstance:
       propertyPath: tweener
       value: 
       objectReference: {fileID: 684489534}
+    - target: {fileID: 6780128338512182606, guid: 23973d22e9b43e347a1729b9d7b1834e, type: 3}
+      propertyPath: pacStudent
+      value: 
+      objectReference: {fileID: 6266983713008124260}
     - target: {fileID: 6780128338512182606, guid: 23973d22e9b43e347a1729b9d7b1834e, type: 3}
       propertyPath: gridManager
       value: 
