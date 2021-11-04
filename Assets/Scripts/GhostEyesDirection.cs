@@ -22,11 +22,6 @@ public class GhostEyesDirection : MonoBehaviour
         eyeSprites[1, 2] = verticalEyeSprites[1];
     }
 
-    private void Update()
-    {
-        SetEyeDirection(direction);
-    }
-
     public void SetEyeDirection(Vector2 direction)
     {
         direction.x += 1;

@@ -24,13 +24,13 @@ public class GhostController : MonoBehaviour, ITweenableObject
         isMoving = false;
         gridPos = GridManager.GlobalPositionToGrid(transform.position);
         State = GhostState.Walking;
+        ChooseTarget();
     }
 
     private void Update()
     {
         if (!isMoving)
         {
-            ChooseTarget();
 
             Vector2 distanceToTarget = new Vector2(transform.position.x - target.x, transform.position.y - target.y);
 
@@ -68,11 +68,13 @@ public class GhostController : MonoBehaviour, ITweenableObject
             {
                 tweener.AddTween(transform, transform.position, potentialXTarget, 1.0f/speed, this);
                 isMoving = true;
+                eyes.SetEyeDirection(Mathf.Sign(potentialXTarget.x) * Vector2.left);
             }
             else if(canMoveY)
             {
                 tweener.AddTween(transform, transform.position, potentialYTarget, 1.0f / speed, this);
                 isMoving = true;
+                eyes.SetEyeDirection(Mathf.Sign(potentialYTarget.y) * Vector2.up);
             }
         }
     }
@@ -81,6 +83,7 @@ public class GhostController : MonoBehaviour, ITweenableObject
     {
         isMoving = false;
         gridPos = GridManager.GlobalPositionToGrid(transform.position);
+        ChooseTarget();
     }
 
     public void ScaredState()
