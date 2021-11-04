@@ -226,6 +226,24 @@ public class GhostController : MonoBehaviour, ITweenableObject
 
             target = GridManager.GridToGlobalPosition(closestPos);
         }
+        else if(ghostNumber == 3)
+        {
+            List<Vector2> validPositions = new List<Vector2>();
+
+            foreach (Vector2 pos in moveablePositions)
+            {
+                if (pos - gridPos != -previousDirection)
+                {
+                    validPositions.Add(pos);
+                }
+            }
+
+            target = GridManager.GridToGlobalPosition(validPositions[Random.Range(0, validPositions.Count)]);
+        }
+        else if(ghostNumber == 4)
+        {
+
+        }
     }
 
     private bool inGhostHouse()
