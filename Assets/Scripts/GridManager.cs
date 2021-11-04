@@ -69,7 +69,7 @@ public class GridManager : MonoBehaviour
     public bool PositionIsMoveableGhost(Vector2 gridPos)
     {
         GridObject selectedGrid = GetGridAtPosition(gridPos);
-        return PositionIsMoveable(gridPos) && selectedGrid.ObjectType != GridObjectType.Teleporter;
+        return selectedGrid.ObjectType == GridObjectType.Empty || selectedGrid.ObjectType == GridObjectType.Pellet || selectedGrid.ObjectType == GridObjectType.PowerPellet;
     }
 
     public GridObjectType GetGridObjectType(Vector2 gridPos)

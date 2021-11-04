@@ -42,30 +42,28 @@ public class GhostController : MonoBehaviour, ITweenableObject
             Vector2 potentialXTarget = new Vector2(transform.position.x + Mathf.Sign(distanceToTarget.x), transform.position.y);
             Vector2 potentialYTarget = new Vector2(transform.position.x, transform.position.y + Mathf.Sign(distanceToTarget.y));
 
-
             if(distanceToTarget.x != 0)
             {
                 if(inGhostHouse())
                 {
-                    canMoveX = gridManager.PositionIsMoveableGhostHouse(potentialXTarget);
+                    canMoveX = gridManager.PositionIsMoveableGhostHouse(GridManager.GlobalPositionToGrid(potentialXTarget));
                 }
                 else
                 {
-                    canMoveX = gridManager.PositionIsMoveableGhost(potentialXTarget);
+                    canMoveX = gridManager.PositionIsMoveableGhost(GridManager.GlobalPositionToGrid(potentialXTarget));
                 }
             }
             else if(distanceToTarget.y != 0)
             {
                 if(inGhostHouse())
                 {
-                    canMoveY = gridManager.PositionIsMoveableGhostHouse(potentialYTarget);
+                    canMoveY = gridManager.PositionIsMoveableGhostHouse(GridManager.GlobalPositionToGrid(potentialYTarget));
                 }
                 else
                 {
-                    canMoveY = gridManager.PositionIsMoveableGhost(potentialYTarget);
+                    canMoveY = gridManager.PositionIsMoveableGhost(GridManager.GlobalPositionToGrid(potentialYTarget));
                 }
             }
-
             if(canMoveX)
             {
                 tweener.AddTween(transform, transform.position, potentialXTarget, 1.0f/speed, this);
@@ -162,21 +160,10 @@ public class GhostController : MonoBehaviour, ITweenableObject
         }
         else if(ghostNumber == 1 || State == GhostState.Scared || State == GhostState.Recovering)
         {
-            Vector2 furthestPos = moveablePositions[0];
-
-            for(int i = 1; i < moveablePositions.Count; i++)
-            {
-                if(Vector2.Distance(moveablePositions[i], GridManager.GlobalPositionToGrid(pacStudent.position)) > Vector2.Distance(furthestPos, GridManager.GlobalPositionToGrid(pacStudent.position)))
-                {
-                    furthestPos = moveablePositions[i];
-                }
-            }
-
-            /*List<Vector2> validPositions = new List<Vector2>();
+            List<Vector2> validPositions = new List<Vector2>();
             foreach(Vector2 pos in moveablePositions)
             {
-                Debug.Log(pos);
-                if(Vector2.Distance(pacStudent.position, GridManager.GridToGlobalPosition(pos)) >= Vector2.Distance(pacStudent.position, transform.position))
+                if(Vector2.Distance(pacStudent.position, GridManager.GridToGlobalPosition(pos)) >= Vector2.Distance(pacStudent.position, transform.position) && pos - gridPos != -previousDirection)
                 {
                     validPositions.Add(pos);
                 }
@@ -186,30 +173,23 @@ public class GhostController : MonoBehaviour, ITweenableObject
 
             if (validPositions.Count != 0)
             {
-                furthestPos = validPositions[0];
-
-                for (int i = 1; i < validPositions.Count; i++)
-                {
-                    if (Vector2.Distance(pacStudent.position, GridManager.GridToGlobalPosition(validPositions[i])) > Vector2.Distance(pacStudent.position, GridManager.GridToGlobalPosition(furthestPos)))
-                    {
-                        furthestPos = validPositions[i];
-                    }
-                }
+                furthestPos = validPositions[Random.Range(0, validPositions.Count)];
             }
             else
             {
-                furthestPos = moveablePositions[0];
+                List<Vector2> notValidButMoveable = new List<Vector2>();
 
-                for (int i = 1; i < moveablePositions.Count; i++)
+                foreach(Vector2 pos in moveablePositions)
                 {
-                    if (Vector2.Distance(pacStudent.position, GridManager.GridToGlobalPosition(moveablePositions[i])) > Vector2.Distance(pacStudent.position, GridManager.GridToGlobalPosition(furthestPos)) && moveablePositions[i] - gridPos != previousDirection)
+                    if(pos - gridPos != -previousDirection)
                     {
-                        furthestPos = moveablePositions[i];
+                        notValidButMoveable.Add(pos);
                     }
                 }
-            }*/
 
-            furthestPos.x *= -1;
+                furthestPos = notValidButMoveable[Random.Range(0, notValidButMoveable.Count)];
+            }
+
             target = GridManager.GridToGlobalPosition(furthestPos);
         }
     }
