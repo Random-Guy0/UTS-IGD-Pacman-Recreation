@@ -21,8 +21,16 @@ public class GhostController : MonoBehaviour, ITweenableObject
     private bool isMoving;
     private Vector2 gridPos;
 
+    private Vector2[] corners;
+    private int currentGhost4Corner;
+
+
+    List<Vector2> moveablePositions = new List<Vector2>();
+
     private void Start()
     {
+        currentGhost4Corner = 0;
+        corners = new Vector2[] { new Vector2(12.5f, 13.0f), new Vector2(12.5f, -13.0f), new Vector2(-12.5f, -13.0f), new Vector2(-12.5f, 13.0f) };
         isMoving = false;
         gridPos = GridManager.GlobalPositionToGrid(transform.position);
         State = GhostState.Walking;
@@ -128,7 +136,7 @@ public class GhostController : MonoBehaviour, ITweenableObject
 
     private void ChooseTarget()
     {
-        List<Vector2> moveablePositions = new List<Vector2>();
+        moveablePositions.Clear();
 
         if(gridManager.PositionIsMoveableGhost(gridPos + Vector2.up))
         {
@@ -242,7 +250,47 @@ public class GhostController : MonoBehaviour, ITweenableObject
         }
         else if(ghostNumber == 4)
         {
+            if(transform.position.x == corners[currentGhost4Corner].x && transform.position.y == corners[currentGhost4Corner].y)
+            {
+                currentGhost4Corner++;
 
+                if(currentGhost4Corner == 4)
+                {
+                    currentGhost4Corner = 0;
+                }
+            }
+
+            List<Vector2> validPositions = new List<Vector2>();
+            foreach (Vector2 pos in moveablePositions)
+            {
+                if (Vector2.Distance(corners[currentGhost4Corner], GridManager.GridToGlobalPosition(pos)) <= Vector2.Distance(corners[currentGhost4Corner], transform.position) && pos - gridPos != -previousDirection)
+                {
+                    validPositions.Add(pos);
+                }
+            }
+
+            Vector2 closestPos;
+
+            if (validPositions.Count != 0)
+            {
+                closestPos = validPositions[Random.Range(0, validPositions.Count)];
+            }
+            else
+            {
+                List<Vector2> notValidButMoveable = new List<Vector2>();
+
+                foreach (Vector2 pos in moveablePositions)
+                {
+                    if (pos - gridPos != -previousDirection)
+                    {
+                        notValidButMoveable.Add(pos);
+                    }
+                }
+
+                closestPos = notValidButMoveable[Random.Range(0, notValidButMoveable.Count)];
+            }
+
+            target = GridManager.GridToGlobalPosition(closestPos);
         }
     }
 
