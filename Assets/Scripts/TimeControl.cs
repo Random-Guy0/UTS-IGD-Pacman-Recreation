@@ -1,16 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class TimeControl : MonoBehaviour
 {
     [SerializeField] private PacStudentController pacStudent;
 
+    [SerializeField] private GameObject slowMotionCountdown;
+    [SerializeField] private TMP_Text slowMotionCountdownText;
+
+    [SerializeField] private GameObject ultraSlowMotionCountdown;
+    [SerializeField] private TMP_Text ultraSlowMotionCountdownText;
+
     private PlayerInput playerInput;
 
     private bool fastForwarding = false;
-    private float slowMotionCooldown = 15.0f;
-    private float ultraSlowMotionCooldown = 30.0f;
+    private int slowMotionCooldown = 15;
+    private int ultraSlowMotionCooldown = 30;
 
     private bool slowMotion = false;
     private bool ultraSlowMotion = false;
@@ -58,7 +65,7 @@ public class TimeControl : MonoBehaviour
 
     private IEnumerator SlowMotion()
     {
-        if(!slowMotion && !ultraSlowMotion)
+        if(!slowMotion && !ultraSlowMotion && canSlowMotion)
         {
             slowMotion = true;
             Time.timeScale *= 0.2f;
@@ -69,14 +76,44 @@ public class TimeControl : MonoBehaviour
             slowMotion = false;
             Time.timeScale *= 5.0f;
             pacStudent.speed *= 0.2f;
+
+            canSlowMotion = false;
+            slowMotionCountdown.SetActive(true);
+            slowMotionCountdownText.text = slowMotionCooldown.ToString();
+            StartCoroutine(SlowMotionCountdown());
+        }
+    }
+
+    private IEnumerator SlowMotionCountdown()
+    {
+        yield return new WaitForSeconds(1.0f);
+        slowMotionCooldown--;
+
+        if(slowMotionCooldown == 0)
+        {
+            canSlowMotion = true;
+            slowMotionCountdown.SetActive(false);
+        }
+        else
+        {
+            slowMotionCountdownText.text = slowMotionCooldown.ToString();
+            StartCoroutine(SlowMotionCountdown());
         }
     }
 
     private IEnumerator UltraSlowMotion()
     {
-        if(!slowMotion && !ultraSlowMotion)
+        if(!slowMotion && !ultraSlowMotion && canSlowMotion)
         {
-            yield return new WaitForSecondsRealtime(0.0f);
+            ultraSlowMotion = true;
+            Time.timeScale *= 0.08f;
+            pacStudent.speed *= 12.5f;
+
+            yield return new WaitForSecondsRealtime(5.0f);
+
+            ultraSlowMotion = false;
+            Time.timeScale *= 12.5f;
+            pacStudent.speed *= 0.08f;
         }
     }
 }

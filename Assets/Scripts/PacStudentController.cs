@@ -89,14 +89,14 @@ public class PacStudentController : MonoBehaviour, ITweenableObject
                 currentInput = lastInput;
 
                 isTweening = true;
-                animator.SetFloat("Moving", 1.0f);
+                animator.SetFloat("Moving", speed / 4.0f);
                 tweener.AddTween(transform, transform.position, GridManager.GridToGlobalPosition(gridPos + currentInput), 1.0f / speed, this);
             }
             else if (gridManager.PositionIsMoveable(gridPos + currentInput))
             {
 
                 isTweening = true;
-                animator.SetFloat("Moving", 1.0f);
+                animator.SetFloat("Moving", speed / 4.0f);
                 tweener.AddTween(transform, transform.position, GridManager.GridToGlobalPosition(gridPos + currentInput), 1.0f / speed, this);
             }
             RotatePacStudent(currentInput);
