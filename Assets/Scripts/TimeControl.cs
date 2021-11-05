@@ -93,6 +93,7 @@ public class TimeControl : MonoBehaviour
         {
             canSlowMotion = true;
             slowMotionCountdown.SetActive(false);
+            slowMotionCooldown = 15;
         }
         else
         {
