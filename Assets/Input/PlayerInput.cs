@@ -169,6 +169,71 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""Time Powers"",
+            ""id"": ""987aa702-b9f8-4f98-b32c-27e338ef4057"",
+            ""actions"": [
+                {
+                    ""name"": ""Fast Forward"",
+                    ""type"": ""Button"",
+                    ""id"": ""06c6c923-eda0-4e1c-a3fb-ac687435a2fe"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Slow Motion"",
+                    ""type"": ""Button"",
+                    ""id"": ""5e7109a2-f114-459f-b2ce-fa1c914577d8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Ultra Slow Motion"",
+                    ""type"": ""Button"",
+                    ""id"": ""931d4ff0-8bbf-416c-80c8-a89886225e37"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""8b152f15-0622-445b-bd42-788463af3caf"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Fast Forward"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""33d5221c-5348-4b71-9b93-6073b63f7e6f"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Slow Motion"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""def3ba12-76f2-46ae-bee8-a94fa6a1ec3a"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ultra Slow Motion"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -177,6 +242,11 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         m_Movement = asset.FindActionMap("Movement", throwIfNotFound: true);
         m_Movement_MoveVertical = m_Movement.FindAction("Move Vertical", throwIfNotFound: true);
         m_Movement_MoveHorizontal = m_Movement.FindAction("Move Horizontal", throwIfNotFound: true);
+        // Time Powers
+        m_TimePowers = asset.FindActionMap("Time Powers", throwIfNotFound: true);
+        m_TimePowers_FastForward = m_TimePowers.FindAction("Fast Forward", throwIfNotFound: true);
+        m_TimePowers_SlowMotion = m_TimePowers.FindAction("Slow Motion", throwIfNotFound: true);
+        m_TimePowers_UltraSlowMotion = m_TimePowers.FindAction("Ultra Slow Motion", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -263,9 +333,64 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         }
     }
     public MovementActions @Movement => new MovementActions(this);
+
+    // Time Powers
+    private readonly InputActionMap m_TimePowers;
+    private ITimePowersActions m_TimePowersActionsCallbackInterface;
+    private readonly InputAction m_TimePowers_FastForward;
+    private readonly InputAction m_TimePowers_SlowMotion;
+    private readonly InputAction m_TimePowers_UltraSlowMotion;
+    public struct TimePowersActions
+    {
+        private @PlayerInput m_Wrapper;
+        public TimePowersActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @FastForward => m_Wrapper.m_TimePowers_FastForward;
+        public InputAction @SlowMotion => m_Wrapper.m_TimePowers_SlowMotion;
+        public InputAction @UltraSlowMotion => m_Wrapper.m_TimePowers_UltraSlowMotion;
+        public InputActionMap Get() { return m_Wrapper.m_TimePowers; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(TimePowersActions set) { return set.Get(); }
+        public void SetCallbacks(ITimePowersActions instance)
+        {
+            if (m_Wrapper.m_TimePowersActionsCallbackInterface != null)
+            {
+                @FastForward.started -= m_Wrapper.m_TimePowersActionsCallbackInterface.OnFastForward;
+                @FastForward.performed -= m_Wrapper.m_TimePowersActionsCallbackInterface.OnFastForward;
+                @FastForward.canceled -= m_Wrapper.m_TimePowersActionsCallbackInterface.OnFastForward;
+                @SlowMotion.started -= m_Wrapper.m_TimePowersActionsCallbackInterface.OnSlowMotion;
+                @SlowMotion.performed -= m_Wrapper.m_TimePowersActionsCallbackInterface.OnSlowMotion;
+                @SlowMotion.canceled -= m_Wrapper.m_TimePowersActionsCallbackInterface.OnSlowMotion;
+                @UltraSlowMotion.started -= m_Wrapper.m_TimePowersActionsCallbackInterface.OnUltraSlowMotion;
+                @UltraSlowMotion.performed -= m_Wrapper.m_TimePowersActionsCallbackInterface.OnUltraSlowMotion;
+                @UltraSlowMotion.canceled -= m_Wrapper.m_TimePowersActionsCallbackInterface.OnUltraSlowMotion;
+            }
+            m_Wrapper.m_TimePowersActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @FastForward.started += instance.OnFastForward;
+                @FastForward.performed += instance.OnFastForward;
+                @FastForward.canceled += instance.OnFastForward;
+                @SlowMotion.started += instance.OnSlowMotion;
+                @SlowMotion.performed += instance.OnSlowMotion;
+                @SlowMotion.canceled += instance.OnSlowMotion;
+                @UltraSlowMotion.started += instance.OnUltraSlowMotion;
+                @UltraSlowMotion.performed += instance.OnUltraSlowMotion;
+                @UltraSlowMotion.canceled += instance.OnUltraSlowMotion;
+            }
+        }
+    }
+    public TimePowersActions @TimePowers => new TimePowersActions(this);
     public interface IMovementActions
     {
         void OnMoveVertical(InputAction.CallbackContext context);
         void OnMoveHorizontal(InputAction.CallbackContext context);
+    }
+    public interface ITimePowersActions
+    {
+        void OnFastForward(InputAction.CallbackContext context);
+        void OnSlowMotion(InputAction.CallbackContext context);
+        void OnUltraSlowMotion(InputAction.CallbackContext context);
     }
 }

@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TMP_Text startCountdownText;
     [SerializeField] private PacStudentController pacStudent;
     [SerializeField] private GameObject gameOverTxt;
+    [SerializeField] private TimeControl timeControl;
 
     private int score;
     private int scaredCountdown;
@@ -130,6 +131,11 @@ public class GameManager : MonoBehaviour
             ghost.enabled = true;
         }
 
+        if(timeControl != null)
+        {
+            timeControl.enabled = true;
+        }    
+
         audioManager.GhostNormalState();
     }
 
@@ -169,6 +175,11 @@ public class GameManager : MonoBehaviour
             ghost.enabled = false;
         }
         gameInProgress = false;
+
+        if(timeControl != null)
+        {
+            timeControl.enabled = false;
+        }
 
         float finalTime = Time.time - startTime;
 

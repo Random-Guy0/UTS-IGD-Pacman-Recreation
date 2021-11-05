@@ -156,6 +156,71 @@
                     "isPartOfComposite": true
                 }
             ]
+        },
+        {
+            "name": "Time Powers",
+            "id": "987aa702-b9f8-4f98-b32c-27e338ef4057",
+            "actions": [
+                {
+                    "name": "Fast Forward",
+                    "type": "Button",
+                    "id": "06c6c923-eda0-4e1c-a3fb-ac687435a2fe",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Slow Motion",
+                    "type": "Button",
+                    "id": "5e7109a2-f114-459f-b2ce-fa1c914577d8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Ultra Slow Motion",
+                    "type": "Button",
+                    "id": "931d4ff0-8bbf-416c-80c8-a89886225e37",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "8b152f15-0622-445b-bd42-788463af3caf",
+                    "path": "<Keyboard>/space",
+                    "interactions": "Press(behavior=2)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fast Forward",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "33d5221c-5348-4b71-9b93-6073b63f7e6f",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Slow Motion",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "def3ba12-76f2-46ae-bee8-a94fa6a1ec3a",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Ultra Slow Motion",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
