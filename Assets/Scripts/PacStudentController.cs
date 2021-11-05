@@ -13,7 +13,7 @@ public class PacStudentController : MonoBehaviour, ITweenableObject
     [SerializeField] private ParticleSystem wallHitEffect;
     [SerializeField] private ParticleSystem deathEffect;
     [SerializeField] private GameManager gameManager;
-    [SerializeField] private float speed;
+    [SerializeField] public float speed;
     [SerializeField] private SpriteRenderer rend;
 
     private Vector2 gridPos;
