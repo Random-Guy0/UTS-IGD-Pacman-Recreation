@@ -113,6 +113,7 @@ public class GhostController : MonoBehaviour, ITweenableObject
             eyes.gameObject.SetActive(false);
             State = GhostState.Scared;
             speed *= 0.5f;
+            animator.ResetTrigger("returnToNormal");
         }
 
         animator.SetTrigger("isScared");
