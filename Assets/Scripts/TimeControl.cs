@@ -104,17 +104,40 @@ public class TimeControl : MonoBehaviour
 
     private IEnumerator UltraSlowMotion()
     {
-        if(!slowMotion && !ultraSlowMotion && canSlowMotion)
+        if(!slowMotion && !ultraSlowMotion && canUltraSlowMotion)
         {
             ultraSlowMotion = true;
             Time.timeScale *= 0.08f;
             pacStudent.speed *= 12.5f;
 
-            yield return new WaitForSecondsRealtime(5.0f);
+            yield return new WaitForSecondsRealtime(7.5f);
 
             ultraSlowMotion = false;
             Time.timeScale *= 12.5f;
             pacStudent.speed *= 0.08f;
+
+            canUltraSlowMotion = false;
+            ultraSlowMotionCountdown.SetActive(true);
+            ultraSlowMotionCountdownText.text = ultraSlowMotionCooldown.ToString();
+            StartCoroutine(UltraSlowMotionCountdown());
+        }
+    }
+
+    private IEnumerator UltraSlowMotionCountdown()
+    {
+        yield return new WaitForSeconds(1.0f);
+        ultraSlowMotionCooldown--;
+
+        if (ultraSlowMotionCooldown == 0)
+        {
+            canUltraSlowMotion = true;
+            ultraSlowMotionCountdown.SetActive(false);
+            ultraSlowMotionCooldown = 30;
+        }
+        else
+        {
+            ultraSlowMotionCountdownText.text = ultraSlowMotionCooldown.ToString();
+            StartCoroutine(UltraSlowMotionCountdown());
         }
     }
 }

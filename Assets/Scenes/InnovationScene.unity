@@ -18036,7 +18036,7 @@ GameObject:
   - component: {fileID: 775795964}
   - component: {fileID: 775795963}
   m_Layer: 5
-  m_Name: Slow Motion Cooldown Heading
+  m_Name: Ultra Slow Motion Cooldown Heading
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18058,7 +18058,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 15, y: -40}
+  m_AnchoredPosition: {x: 15, y: -80}
   m_SizeDelta: {x: 115, y: 15}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &775795963
@@ -18081,7 +18081,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Slow Motion Cooldown
+  m_text: 'Ultra Slow Motion Cooldown
 
 '
   m_isRightToLeft: 0
@@ -23314,7 +23314,7 @@ GameObject:
   - component: {fileID: 1026086168}
   - component: {fileID: 1026086167}
   m_Layer: 5
-  m_Name: Slow Motion Countdown
+  m_Name: Ultra Slow Motion Countdown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23336,7 +23336,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -15, y: -60}
+  m_AnchoredPosition: {x: -15, y: -107.5}
   m_SizeDelta: {x: 85, y: 15}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1026086167
@@ -23359,7 +23359,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 15
+  m_text: 30
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7bc94e3f61c5dd54f83a2e34f0924e8d, type: 2}
   m_sharedMaterial: {fileID: -7367762995129383387, guid: 7bc94e3f61c5dd54f83a2e34f0924e8d, type: 2}
@@ -35094,7 +35094,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1617215707}
   m_Layer: 5
-  m_Name: Slow Motion Cooldown (1)
+  m_Name: Ultra Slow Motion Cooldown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44736,8 +44736,8 @@ MonoBehaviour:
   pacStudent: {fileID: 1388025777}
   slowMotionCountdown: {fileID: 694675761}
   slowMotionCountdownText: {fileID: 461729450}
-  ultraSlowMotionCountdown: {fileID: 0}
-  ultraSlowMotionCountdownText: {fileID: 0}
+  ultraSlowMotionCountdown: {fileID: 1617215706}
+  ultraSlowMotionCountdownText: {fileID: 1026086167}
 --- !u!4 &2028217004
 Transform:
   m_ObjectHideFlags: 0
