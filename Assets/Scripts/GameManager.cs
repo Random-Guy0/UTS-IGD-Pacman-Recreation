@@ -168,6 +168,7 @@ public class GameManager : MonoBehaviour
 
     private void GameOver()
     {
+        audioManager.StopSoundEffects();
         Time.timeScale = 1.0f;
         gameOverTxt.SetActive(true);
         pacStudent.enabled = false;
