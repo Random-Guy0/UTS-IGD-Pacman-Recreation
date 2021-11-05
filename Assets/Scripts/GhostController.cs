@@ -39,7 +39,7 @@ public class GhostController : MonoBehaviour, ITweenableObject
 
     private void Update()
     {
-        if (!isMoving)
+        if (!isMoving && State != GhostState.Dead)
         {
             Vector2 distanceToTarget = new Vector2(target.x - transform.position.x, target.y - transform.position.y);
 
@@ -87,6 +87,10 @@ public class GhostController : MonoBehaviour, ITweenableObject
                 previousDirection = Mathf.Sign(distanceToTarget.y) * Vector2.up;
             }
         }
+        else
+        {
+            tweener.AddTween(transform, transform.position, target, 1.0f / 0.4f, this);
+        }
     }
 
     public void NextTween()
@@ -124,10 +128,9 @@ public class GhostController : MonoBehaviour, ITweenableObject
         State = GhostState.Dead;
         rend.enabled = false;
         eyes.gameObject.SetActive(true);
-        Invoke("Respawn", 5.0f);
     }
 
-    private void Respawn()
+    public void Respawn()
     {
         animator.SetTrigger("returnToNormal");
         rend.enabled = true;
@@ -158,7 +161,11 @@ public class GhostController : MonoBehaviour, ITweenableObject
             moveablePositions.Add(gridPos + Vector2.right);
         }
 
-        if (inGhostHouse())
+        if(State == GhostState.Dead)
+        {
+            target = gridManager.GetGlobalPosOfClosetObject(GridObjectType.GhostHouseInterior, transform.position);
+        }
+        else if (inGhostHouse())
         {
             target = gridManager.GetGlobalPosOfClosetObject(GridObjectType.GhostHouseExit, transform.position);
         }
