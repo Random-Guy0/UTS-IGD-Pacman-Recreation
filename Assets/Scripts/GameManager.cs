@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
 
     private int score;
     private int scaredCountdown;
-    private int lives;
+    [SerializeField] private int lives;
     private bool gameInProgress;
     private float startTime;
     private int gameStartCountdown;
@@ -32,7 +32,6 @@ public class GameManager : MonoBehaviour
     {
         score = 0;
         scoreText.text = score.ToString();
-        lives = 3;
         gameInProgress = false;
         pelletCount = 218;
 
@@ -189,5 +188,63 @@ public class GameManager : MonoBehaviour
     private void ReturnToStartScene()
     {
         SceneManager.LoadSceneAsync(0);
+    }
+
+    public GhostState GetStateOfOtherGhosts()
+    {
+        GhostState state = GhostState.Dead;
+        foreach(GhostController ghost in ghosts)
+        {
+            if(ghost.State != GhostState.Dead)
+            {
+                state = ghost.State;
+            }
+        }
+
+        if (state != GhostState.Dead)
+        {
+            return state;
+        }
+        else
+        {
+            return GhostState.Walking;
+        }
+    }
+
+    public void GhostDeadMusic()
+    {
+        audioManager.GhostDeadState();
+    }
+
+    private int DeadGhostCount()
+    {
+        int count = 0;
+        foreach (GhostController ghost in ghosts)
+        {
+            if (ghost.State == GhostState.Dead)
+            {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public void RespawnMusic()
+    {
+        if(DeadGhostCount() == 0)
+        {
+            GhostState state = GetStateOfOtherGhosts();
+
+            switch(state)
+            {
+                case GhostState.Walking:
+                    audioManager.GhostNormalState();
+                    break;
+                case GhostState.Recovering:
+                case GhostState.Scared:
+                    audioManager.GhostScaredState();
+                    break;
+            }
+        }
     }
 }

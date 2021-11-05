@@ -1268,6 +1268,7 @@ MonoBehaviour:
   startCountdownText: {fileID: 1759331696}
   pacStudent: {fileID: 573804307}
   gameOverTxt: {fileID: 1991794629}
+  lives: 3
 --- !u!4 &85960834
 Transform:
   m_ObjectHideFlags: 0
@@ -29399,36 +29400,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2958017690608479227, guid: dff8cd05fefd3dc40ac258acf85906df, type: 3}
   m_PrefabInstance: {fileID: 1401932444}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1406346239
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1406346240}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1406346240
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1406346239}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.5, y: 3, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 14
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1410729165
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46478,6 +46449,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6266983713008124260}
     - target: {fileID: 4061390140740485511, guid: 4cce7a4af323f8747bbddc5cc7642a75, type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 85960833}
+    - target: {fileID: 4061390140740485511, guid: 4cce7a4af323f8747bbddc5cc7642a75, type: 3}
       propertyPath: gridManager
       value: 
       objectReference: {fileID: 686316143}
@@ -46498,6 +46473,10 @@ PrefabInstance:
       propertyPath: pacStudent
       value: 
       objectReference: {fileID: 6266983713008124260}
+    - target: {fileID: -3139865956851778379, guid: 26b3ff79b5c1903458f4a8fdf791d0e5, type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 85960833}
     - target: {fileID: -3139865956851778379, guid: 26b3ff79b5c1903458f4a8fdf791d0e5, type: 3}
       propertyPath: gridManager
       value: 
@@ -46651,6 +46630,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6266983713008124260}
     - target: {fileID: -1871820881530016444, guid: 2d634805ac21c8944a5dd57a36d24ba2, type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 85960833}
+    - target: {fileID: -1871820881530016444, guid: 2d634805ac21c8944a5dd57a36d24ba2, type: 3}
       propertyPath: gridManager
       value: 
       objectReference: {fileID: 686316143}
@@ -46731,6 +46714,10 @@ PrefabInstance:
       propertyPath: pacStudent
       value: 
       objectReference: {fileID: 6266983713008124260}
+    - target: {fileID: 6780128338512182606, guid: 23973d22e9b43e347a1729b9d7b1834e, type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 85960833}
     - target: {fileID: 6780128338512182606, guid: 23973d22e9b43e347a1729b9d7b1834e, type: 3}
       propertyPath: gridManager
       value: 

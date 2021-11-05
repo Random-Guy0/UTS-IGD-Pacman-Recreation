@@ -253,7 +253,6 @@ public class PacStudentController : MonoBehaviour, ITweenableObject
             else if(state == GhostState.Scared || state == GhostState.Recovering)
             {
                 ghost.DeadState();
-                audioManager.GhostDeadState();
                 gameManager.AddScore(300);
             }
         }

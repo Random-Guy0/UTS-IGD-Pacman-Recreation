@@ -12,6 +12,7 @@ public class GhostController : MonoBehaviour, ITweenableObject
     [SerializeField] private float speed;
     [SerializeField] private int ghostNumber;
     [SerializeField] private Transform pacStudent;
+    [SerializeField] private GameManager gameManager;
 
     public GhostState State { get; private set; }
 
@@ -50,9 +51,9 @@ public class GhostController : MonoBehaviour, ITweenableObject
             Vector2 potentialXTarget = new Vector2(transform.position.x + Mathf.Sign(distanceToTarget.x), transform.position.y);
             Vector2 potentialYTarget = new Vector2(transform.position.x, transform.position.y + Mathf.Sign(distanceToTarget.y));
 
-            if(distanceToTarget.x != 0)
+            if (distanceToTarget.x != 0)
             {
-                if(inGhostHouse())
+                if (InGhostHouse())
                 {
                     canMoveX = gridManager.PositionIsMoveableGhostHouse(GridManager.GlobalPositionToGrid(potentialXTarget));
                 }
@@ -61,9 +62,9 @@ public class GhostController : MonoBehaviour, ITweenableObject
                     canMoveX = gridManager.PositionIsMoveableGhost(GridManager.GlobalPositionToGrid(potentialXTarget));
                 }
             }
-            else if(distanceToTarget.y != 0)
+            else if (distanceToTarget.y != 0)
             {
-                if(inGhostHouse())
+                if (InGhostHouse())
                 {
                     canMoveY = gridManager.PositionIsMoveableGhostHouse(GridManager.GlobalPositionToGrid(potentialYTarget));
                 }
@@ -72,14 +73,14 @@ public class GhostController : MonoBehaviour, ITweenableObject
                     canMoveY = gridManager.PositionIsMoveableGhost(GridManager.GlobalPositionToGrid(potentialYTarget));
                 }
             }
-            if(canMoveX)
+            if (canMoveX)
             {
-                tweener.AddTween(transform, transform.position, potentialXTarget, 1.0f/speed, this);
+                tweener.AddTween(transform, transform.position, potentialXTarget, 1.0f / speed, this);
                 isMoving = true;
                 eyes.SetEyeDirection(Mathf.Sign(distanceToTarget.x) * Vector2.right);
                 previousDirection = Mathf.Sign(distanceToTarget.x) * Vector2.right;
             }
-            else if(canMoveY)
+            else if (canMoveY)
             {
                 tweener.AddTween(transform, transform.position, potentialYTarget, 1.0f / speed, this);
                 isMoving = true;
@@ -89,7 +90,12 @@ public class GhostController : MonoBehaviour, ITweenableObject
         }
         else
         {
-            tweener.AddTween(transform, transform.position, target, 1.0f / 0.4f, this);
+            tweener.AddTween(transform, transform.position, target, 1.0f / 0.8f, this);
+        }
+
+        if (InGhostHouse() && State == GhostState.Dead)
+        {
+            Respawn();
         }
     }
 
@@ -102,25 +108,36 @@ public class GhostController : MonoBehaviour, ITweenableObject
 
     public void ScaredState()
     {
+        if (State != GhostState.Dead)
+        {
+            eyes.gameObject.SetActive(false);
+            State = GhostState.Scared;
+            speed *= 0.5f;
+        }
+
         animator.SetTrigger("isScared");
-        eyes.gameObject.SetActive(false);
-        State = GhostState.Scared;
     }
 
     public void RecoveringState()
     {
+        if (State != GhostState.Dead)
+        {
+            State = GhostState.Recovering;
+            eyes.gameObject.SetActive(false);
+        }
         animator.SetTrigger("isRecovering");
-        State = GhostState.Recovering;
     }
 
     public void WalkingState()
     {
         if (State != GhostState.Dead)
         {
-            animator.SetTrigger("returnToNormal");
             eyes.gameObject.SetActive(true);
             State = GhostState.Walking;
+            speed *= 2.0f;
         }
+
+        animator.SetTrigger("returnToNormal");
     }
 
     public void DeadState()
@@ -128,13 +145,27 @@ public class GhostController : MonoBehaviour, ITweenableObject
         State = GhostState.Dead;
         rend.enabled = false;
         eyes.gameObject.SetActive(true);
+        gameManager.GhostDeadMusic();
     }
 
     public void Respawn()
     {
-        animator.SetTrigger("returnToNormal");
-        rend.enabled = true;
-        State = GhostState.Walking;
+        if (State == GhostState.Dead)
+        {
+            rend.enabled = true;
+            State = gameManager.GetStateOfOtherGhosts();
+            gameManager.RespawnMusic();
+
+            if (State == GhostState.Scared || State == GhostState.Recovering)
+            {
+                eyes.gameObject.SetActive(false);
+            }
+
+            if (State == GhostState.Walking)
+            {
+                WalkingState();
+            }
+        }
     }
 
     private void ChooseTarget()
@@ -161,11 +192,12 @@ public class GhostController : MonoBehaviour, ITweenableObject
             moveablePositions.Add(gridPos + Vector2.right);
         }
 
-        if(State == GhostState.Dead)
+        if(State == GhostState.Dead && !InGhostHouse())
         {
+            //tweener.CancelTween(transform); this just cancels the wrong tween sometimes idk why
             target = gridManager.GetGlobalPosOfClosetObject(GridObjectType.GhostHouseInterior, transform.position);
         }
-        else if (inGhostHouse())
+        else if (InGhostHouse())
         {
             target = gridManager.GetGlobalPosOfClosetObject(GridObjectType.GhostHouseExit, transform.position);
         }
@@ -301,7 +333,7 @@ public class GhostController : MonoBehaviour, ITweenableObject
         }
     }
 
-    private bool inGhostHouse()
+    private bool InGhostHouse()
     {
         return gridManager.GetGridObjectType(gridPos) == GridObjectType.GhostHouseInterior;
     }
